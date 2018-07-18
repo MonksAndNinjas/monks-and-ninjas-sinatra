@@ -1,1 +1,15 @@
 <h1>Tell us about youself <%= @user.username %>!</h1>
+
+<form action="/about_me" method="POST">
+  <label>What's your place in fitness?</label>
+
+  <br></br>
+
+  <input type="checkbox" name="hobby">Hobby</input>
+  <input type="checkbox" name="professional">Professional</input>
+
+  <br></br>
+
+  <label>Where do you live?</label>
+  <input type="text" name="residence">
+</form>
