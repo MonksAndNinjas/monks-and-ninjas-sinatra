@@ -1,4 +1,4 @@
-!doctype html>
+<!doctype html>
 <html>
   <head>
     <title>Monks And Ninjas</title>
@@ -11,8 +11,13 @@
     <a href="/teachers">Teachers</a><br>
     <a href="/contact">Contact</a><br>
     <a href="/events">Classes and Retreats</a><br>
-    <a href="/signup">Sign Up</a><br>
-    <a href="/login">Log In</a>
+
+    <% if Helpers.is_logged_in?(session) %>
+      <a href="/logout">Logout <%= Helpers.current_user(session).username %></a>
+    <% else %>
+      <a href="/signup">Sign Up</a><br>
+      <a href="/login">Log In</a>
+    <% end %>
 
     <br></br>
 
