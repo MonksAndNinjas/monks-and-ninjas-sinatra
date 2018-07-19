@@ -30,10 +30,12 @@ class RegistrationsController < ApplicationController
   end
 
   post '/about_me' do
-    if !params[:residence].empty? && !params[:professional] && !params[:fitness_level]
+    if !params[:residence].empty? && !params[:professional].empty? && !params[:fitness_level].empty?
       user = User.find_by_id(session[:user_id])
       user.update(residence: params[:residence], professional: params[:professional], fitness_level: params[:fitness_level])
       user.save
+
+      if !parmas[:modality_name].empty?
 
       redirect to '/move'
     else
