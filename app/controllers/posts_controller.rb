@@ -13,4 +13,13 @@ class PostsController < ApplicationController
     end
   end
 
+  get '/posts/:id/edit' do
+    if Helpers.is_logged_in?(session)
+
+      erb :'posts/edit'
+    else
+      redirect to '/login'
+    end
+  end
+
 end
