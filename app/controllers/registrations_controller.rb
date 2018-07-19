@@ -31,7 +31,8 @@ class RegistrationsController < ApplicationController
 
   post '/about_me' do
     if !params[:residence].empty? && !params[:professional] && !params[:fitness_level]
-    @user = User.find_by_id(session[:user_id])
+      @user = User.find_by_id(session[:user_id])
+      @user.update(residence: params[:residence], professional: params[:professional], fitness_level: params[:fitness_level])
 
   end
 
