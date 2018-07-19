@@ -22,4 +22,13 @@ class PostsController < ApplicationController
     end
   end
 
+  get '/posts/new' do
+    if Helpers.is_logged_in?(session)
+
+      erb :'posts/new'
+    else
+      redirect to '/login'
+    end
+  end
+
 end
