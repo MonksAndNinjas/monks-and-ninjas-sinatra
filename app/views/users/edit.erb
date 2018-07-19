@@ -1,0 +1,52 @@
+<h1>Edit your account</h1>
+
+<form action="/users/<%= @user.slug %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
+
+  <label>Username: </label>
+  <input type="text" name="username" placeholder="<%= @user.username %>">
+
+  <br></br>
+
+  <label>Change Password: </label>
+  <input type="text" name="password">
+
+  <br></br>
+
+  <label>Are you a fitness professional?</label>
+
+  <br></br>
+
+  <input type="radio" name="professional" value="true" <%= 'checked' if @user.professional == true %>>Yes</input>
+  <input type="radio" name="professional" value="false" <%= 'checked' if @user.professional == false %>>No</input>
+
+  <br></br>
+
+  <label>Where do you live?</label>
+  <input type="text" name="residence" placeholder="<%= @user.residence %>">
+
+  <br></br>
+
+  <label>What is your fitness level? (N = Novice, I = Intermediate, A = Advanced, E = Expert)</label>
+  <input type="text" name="fitness_level" placeholder="<%= @user.fitness_level %>">
+
+  <br></br>
+
+  <label>What is your area of interest or expertise?</label>
+
+  <br></br>
+
+  <% FitnessModality.all.each do |modality| %>
+    <input type="checkbox" name="modalities[]" value="<%= modality.id %>" <%= 'checked' if @user.fitness_modalities.include?(modality) %>
+    ><%= modality.name %></input><br>
+  <% end %>
+
+  <br></br>
+
+  <label>or tell us your specialty!</label>
+  <input type="text" name="modality_name">
+
+  <br></br>
+
+  <input type="submit" value="Update">
+</form>
