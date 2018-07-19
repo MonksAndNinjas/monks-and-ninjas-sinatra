@@ -29,4 +29,8 @@ class RegistrationsController < ApplicationController
     end
   end
 
+  post '/about_me' do
+    
+  end
+
 end
