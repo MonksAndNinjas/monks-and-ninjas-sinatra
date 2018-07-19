@@ -3,7 +3,11 @@ require './config/environment'
 class UsersController < ApplicationController
 
   get '/login' do
-    erb :'sessions/login'
+    if Helpers.is_logged_in?(session)
+      redirect to '/move'
+    else
+      erb :'sessions/login'
+    end
   end
 
   post '/login' do
