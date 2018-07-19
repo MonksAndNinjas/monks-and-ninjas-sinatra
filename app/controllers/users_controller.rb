@@ -19,9 +19,13 @@ class UsersController < ApplicationController
   end
 
   get '/move' do
-    @user = User.find_by_id(session[:user_id])
-    
-    erb :move
+    if Helpers.is_logged_in?(session)
+      @user = User.find_by_id(session[:user_id])
+
+      erb :move
+    else
+      redirect to '/login'
+    end
   end
 
   get '/logout' do

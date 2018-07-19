@@ -3,7 +3,11 @@ require './config/environment'
 class RegistrationsController < ApplicationController
 
   get '/signup' do
-    erb :'registrations/signup'
+    if Helpers.is_logged_in?(session)
+      redirect to '/move'
+    else
+      erb :'registrations/signup'
+    end
   end
 
   get '/about_me' do
