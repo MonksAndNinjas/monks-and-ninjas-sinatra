@@ -20,17 +20,17 @@
 
   <br></br>
 
-  <label>What is your area of interest or expertise? (Select no more than three)</label>
+  <label>What is your area of interest or expertise?</label>
 
   <br></br>
 
   <% FitnessModality.all.each do |modality| %>
-    <input type="checkbox" name="modalities[]" value="<%= modality.id %>"><%= modality.name %></input>
+    <input type="checkbox" name="modalities[]" value="<%= modality.id %>"><%= modality.name %></input><br>
   <% end %>
 
   <br></br>
 
-  <label>or tell us your specialty! (Please don't add fitness movements, try to be specific)</label>
+  <label>or tell us your specialty!</label>
   <input type="text" name="modality_name">
 
   <br></br>

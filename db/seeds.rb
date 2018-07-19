@@ -31,5 +31,5 @@
 @user5 = User.new(username: "Sonia", email: "pepe@gmail.com", password_digest: "blue")
 @user5.update(residence: "El Salvador", fitness_level: "N", professional: "false")
 @user5.fitness_modality_ids << @fitness1.id
-@user5.fitness_modality_ids << FitnessModality.new(name: "Foot Volleyball")
+@user5.fitness_modalities << FitnessModality.new(name: "Foot Volleyball")
 @user5.save
