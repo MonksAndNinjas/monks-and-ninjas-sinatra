@@ -54,3 +54,9 @@
     <li><%= post.content %></li>
   </ul>
 <% end %>
+
+<br></br>
+
+<% if Helpers.current_user(session).id == @user.id %>
+  <a href="/posts/new">Create New Post</a>
+<% end %>
