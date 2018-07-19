@@ -14,7 +14,7 @@
 
     <% if Helpers.is_logged_in?(session) %>
       <a href="/move">Move</a><br>
-      <a href="/users/:slug">Account</a><br>
+      <a href="/users/<%= Helpers.current_user(session).slug %>">Account</a><br>
       <a href="/logout">Logout <%= Helpers.current_user(session).username %></a>
     <% else %>
       <a href="/signup">Sign Up</a><br>
