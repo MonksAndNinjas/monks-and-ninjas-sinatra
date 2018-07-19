@@ -6,6 +6,16 @@ class RegistrationsController < ApplicationController
     erb :'registrations/signup'
   end
 
+  get '/about_me' do
+    if Helpers.is_logged_in?(session)
+      @user = User.find_by_id(session[:user_id])
+
+      erb :'registrations/about_me'
+    else
+      redirect to '/login'
+    end
+  end
+
   post '/signup' do
     if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
       user = User.new(params)
@@ -19,18 +29,10 @@ class RegistrationsController < ApplicationController
     end
   end
 
-  get '/about_me' do
-    if Helpers.is_logged_in?(session)
-      @user = User.find_by_id(session[:user_id])
-
-      erb :'registrations/about_me'
-    else
-      redirect to '/login'
-    end
-  end
-
   post '/about_me' do
-    
+    if !params[:residence].empty? && !params[:professional] && !params[:fitness_level]
+    @user = User.find_by_id(session[:user_id])
+
   end
 
 end
