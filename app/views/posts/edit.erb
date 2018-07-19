@@ -1,0 +1,9 @@
+<h1>Post <%= @post.id %></h1>
+
+<h2>posted by: <a href="/users/<%= User.find_by_id(@post.user_id).slug %>"><%= User.find_by_id(@post.user_id).username %></a></h2>
+
+<p><%= @post.content %></p>
+
+<% if @user.id == @post.user_id %>
+  <a href="/posts/<%= @post.id %>/edit">Edit Post</a>
+<% end %>
