@@ -7,9 +7,14 @@ class UsersController < ApplicationController
   end
 
   get '/move' do
-    binding.pry
     @user = User.find_by_id(session[:user_id])
     erb :move
+  end
+
+  get '/logout' do
+    session.clear
+
+    redirect to '/login'
   end
 
 end
