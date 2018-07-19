@@ -1,1 +1,37 @@
-<h1>I'm a user</h1>
+<h1><%= @user.username %></h1>
+
+<ul>
+  <li>Residence: <%= @user.residence %></li>
+
+  <br></br>
+
+  <li>Fitness Level: <%= @user.fitness_level %></li>
+
+  <br></br>
+
+  <li>Fitness Professional:
+    <% if @user.professional %>
+      Yes</li>
+    <% else %>
+      No</li>
+    <% end %>
+
+  <br></br>
+
+  <li>Fitness Specialties: </li>
+  <ul>
+    <% @user.fitness_modalities.each do |modality| %>
+      <li><%= modality.name %></li>
+    <% end %>
+  </ul>
+
+  <br></br>
+
+  <li>Posts</li>
+</ul>
+
+<br></br>
+
+<form>
+  <input type="submit" value="Contact">
+</form>
