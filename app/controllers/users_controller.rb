@@ -45,11 +45,15 @@ class UsersController < ApplicationController
   get '/users/:slug/edit' do
     if Helpers.is_logged_in?(session)
       @user = User.find_by_slug(params[:slug])
-      
+
       erb :'/users/edit'
     else
       redirect to '/login'
     end
+  end
+
+  patch '/users/:slug' do
+    
   end
 
   get '/logout' do
