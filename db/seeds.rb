@@ -8,13 +8,13 @@
 
 @user1 = User.new(username: "Joseph", email: "blackbelt@gmail.com", password: "blue")
 @user1.update(residence: "Los Angeles", fitness_level: "E", professional: "true")
-@user1.fitness_modality_ids << @fitness1.id
+@user1.fitness_modalities << @fitness1
 @user1.save
 
 @user2 = User.new(username: "Nadia", email: "east@gmail.com", password: "blue")
 @user2.update(residence: "Boulder", fitness_level: "A", professional: "false")
-@user2.fitness_modality_ids << @fitness3.id
-@user2.fitness_modality_ids << @fitness2.id
+@user2.fitness_modalities << @fitness3
+@user2.fitness_modalities << @fitness2
 @user2.save
 
 @user3 = User.new(username: "Rhys", email: "wolf@gmail.com", password: "blue")
@@ -30,6 +30,6 @@
 
 @user5 = User.new(username: "Sonia", email: "pepe@gmail.com", password: "blue")
 @user5.update(residence: "El Salvador", fitness_level: "N", professional: "false")
-@user5.fitness_modality_ids << @fitness1.id
+@user5.fitness_modalities << @fitness1
 @user5.fitness_modalities << FitnessModality.new(name: "Foot Volleyball")
 @user5.save

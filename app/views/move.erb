@@ -1,1 +1,55 @@
+<h1>Fitness News</h1>
 
+<ul>
+  <li>Have you heard of beer Yoga? Checkout the new trend to help calm you down so you can then
+  properly absorb all the soothing relaxing yoga poses.</li>
+
+  <br></br>
+
+  <li>Swing my baby. The long lost art of baby throwing. Watch these masters swing and toss babies 
+  in the air to promote family bonding.</li>
+
+  <br></br>
+
+  <li>Science says you're moving wrong, so stop it and move the right way.</li>
+
+  <br></br>
+
+  <li>Use these exercises to open the newly discovered third eye of your gut. Practitioners swear that after 
+  two weeks you'll be thinking, eating, and moving twice as fast.</li>
+
+  <br></br>
+
+  <li>Do you suffer from sleeping problems. Well, it could be your bed. Switch from the fluffy, cloud like mattresses
+  to a strong unchangeable wooded board to alleviate your back pain.</li>
+
+  <br></br>
+
+  <li>Non-meat-eaters beware, studies show plants are conscious too. Hey I'm alive over here!</li>
+
+  <br></br>
+
+  <li>Self-proclaimed fitness master claims there is no right or wrong way to move. All that matters is how much
+  are you paying attention. So minimize your distractions during your workouts.</li>
+</ul>
+
+<h1>Posts from other members</h1>
+
+<ul>
+  <% Post.all.each do |post| %>
+    <li><%= post.content %></li>
+  <% end %>
+</ul>
+
+<h1>Connect</h1>
+
+<ul>
+  <% User.all.each do |user| %>
+    <li><a href="/users/<%= user.slug %>"><%= user.username %></a></li>
+    <ul>
+      <% user.fitness_modalities.each do |modality| %>
+        <li><%= modality.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</ul>
