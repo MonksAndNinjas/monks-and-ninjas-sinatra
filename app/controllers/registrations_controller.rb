@@ -11,10 +11,15 @@ class RegistrationsController < ApplicationController
   end
 
   get '/about_me' do
-    if Helpers.is_logged_in?(session)
+
+    if Helpers.is_logged_in?(session) && Helpers.current_user(session).residence.empty?
       @user = User.find_by_id(session[:user_id])
 
       erb :'registrations/about_me'
+    elsif Helpers.is_logged_in?(session) && !Helpers.current_user(session).residence.empty?
+      @user = User.find_by_id(session[:user_id])
+
+      redirect to "/users/#{@user.slug}"
     else
       redirect to '/login'
     end

@@ -47,3 +47,10 @@
 <% end %>
 
 <h3>Your Posts</h3>
+
+<% @user.posts.each do |post| %>
+  <label><a href="/posts/<%= post.id %>">Post <%= post.id %></a></label>
+  <ul>
+    <li><%= post.content %></li>
+  </ul>
+<% end %>
