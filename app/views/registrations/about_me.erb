@@ -1,12 +1,12 @@
 <h1>Tell us about youself <%= @user.username %>!</h1>
 
 <form action="/about_me" method="POST">
-  <label>What's your place in fitness?</label>
+  <label>Are you a fitness professional?</label>
 
   <br></br>
 
-  <input type="checkbox" name="fitness-hobby">Hobby</input>
-  <input type="checkbox" name="fitness-professional">Professional</input>
+  <input type="checkbox" name="professional">Yes</input>
+  <input type="checkbox" name="professional">No</input>
 
   <br></br>
 
@@ -19,11 +19,9 @@
 
   <br></br>
 
-  <input type="checkbox" name="specialty_gymnastics">Gymnastics</input>
-  <input type="checkbox" name="specialty_martial_arts">Martial Arts</input>
-  <input type="checkbox" name="specialty_yoga">Yoga</input>
-  <input type="checkbox" name="specialty_basketball">Basketball</input>
-  <input type="checkbox" name="specialty_animal_movements">Animal Movements</input>
+  <% FitnessModality.all.each do |modality| %>
+    <input type="checkbox" name="modalities[]" value="<%= modality.id %>"><%= modality.name %></input>
+  <% end %>
 
   <br></br>
 
