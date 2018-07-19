@@ -15,7 +15,12 @@
 
 <ul>
   <% Post.all.each do |post| %>
-    <li><%= post.content %></li>
+
+    <label><a href="/users/<%= User.find_by_id(post.user_id).slug %>"><%= User.find_by_id(post.user_id).username %></a></label>
+    <ul>
+      <li><%= post.content %></li>
+    </ul>
+    <br></br>
   <% end %>
 </ul>
 

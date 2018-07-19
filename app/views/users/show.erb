@@ -30,10 +30,6 @@
       <li><%= modality.name %></li>
     <% end %>
   </ul>
-
-  <br></br>
-
-  <li>Posts</li>
 </ul>
 
 <br></br>
@@ -41,9 +37,13 @@
 <% if Helpers.current_user(session).id == @user.id %>
   <a href="/users/<%= Helpers.current_user(session).slug %>/edit">Edit Account</a>
 
+  <br></br>
 <% else %>
   <form>
     <input type="submit" value="Contact">
   </form>
 
+  <br></br>
 <% end %>
+
+<h3>Your Posts</h3>
