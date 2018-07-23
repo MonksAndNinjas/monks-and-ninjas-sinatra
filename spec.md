@@ -14,7 +14,9 @@ Specs:
 - [x] Include at least one has_many relationship on your User model (x has_many y, e.g. User has_many Posts)
       My user model contains three has many relationships. (1)has_many posts, (2)has_many user_fitness_modalities, and (3)has_many fitness_modalities.
 
-- [ ] Include at least one belongs_to relationship on another model (x belongs_to y, e.g. Post belongs_to User)
+- [x] Include at least one belongs_to relationship on another model (x belongs_to y, e.g. Post belongs_to User)
+      My user_fitness_modality and post class both contain belongs_to relationships. (1)belongs_to fitness_modality, (2)belongs_to user, and (3)belongs_to user in post.rb.
+
 - [ ] Include user accounts
 - [ ] Ensure that users can't modify content created by other users
 - [ ] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
