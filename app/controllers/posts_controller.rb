@@ -11,12 +11,12 @@ class PostsController < ApplicationController
     end
   end
 
-  posts '/posts' do
+  post '/posts' do
     user = User.find_by_id(session[:user_id])
     post = Post.new(content: params[:content])
     user.posts << post
     user.save
-    
+
     redirect to '/move'
   end
 
@@ -47,6 +47,13 @@ class PostsController < ApplicationController
     post.save
 
     redirect to "/posts/#{post.id}"
+  end
+
+  delete '/posts/:id/delete' do
+    post = Post.find_by_id(params[:id])
+    post.delete
+
+    redirect to '/posts'
   end
 
 end
