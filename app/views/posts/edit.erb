@@ -2,8 +2,13 @@
 
 <h2>posted by: <a href="/users/<%= User.find_by_id(@post.user_id).slug %>"><%= User.find_by_id(@post.user_id).username %></a></h2>
 
-<p><%= @post.content %></p>
+<form action="/posts/<%= @post.id %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
 
-<% if @user.id == @post.user_id %>
-  <a href="/posts/<%= @post.id %>/edit">Edit Post</a>
-<% end %>
+  <label>Content</label>
+  <input type="text" name="content" placeholder="<%= @post.content %>">
+
+  <br></br>
+
+  <input type="submit" value="Update">
+</form>
