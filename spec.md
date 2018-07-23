@@ -20,8 +20,18 @@ Specs:
 - [x] Include user accounts
       Enabeled and set sessions so that user activity can be tracked by creating a user account.
 
-- [ ] Ensure that users can't modify content created by other users
-- [ ] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
+- [x] Ensure that users can't modify content created by other users
+      First, users must be logged in to view any user page. This is accomplished by using helpers methods such as Helpers.is_logged_in?(session) that are called on when using get requests that can be found in users and posts controllers.
+
+      Second, methods are used within the ERB file to display modification links only if the user id of that information is equal to the user id of the sessions hash.
+
+      Models names for the resources whose editing is limited include User, Posts, and FitnessModality.
+
+      FitnessModality can only be edited in the about_me user page.
+
+- [X] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
+      Posts contains get, post, patch, delete routes. User contains get, post, and patch routes, but not destroy.
+
 - [ ] Include user input validations
 - [ ] Display validation failures to user with error message (example form URL e.g. /posts/new)
 - [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
