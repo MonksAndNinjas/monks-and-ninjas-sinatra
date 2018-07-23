@@ -27,4 +27,12 @@ class PostsController < ApplicationController
     end
   end
 
+  patch '/posts/:id' do
+    post = Post.find_by_id(params[:id])
+    post.content = params[:content]
+    post.save
+
+    redirect to "posts/#{post.id}"
+  end
+
 end
