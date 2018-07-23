@@ -3,7 +3,21 @@ require './config/environment'
 class PostsController < ApplicationController
 
   get '/posts/new' do
-    erb :'posts/new'
+    if Helpers.is_logged_in?(session)
+
+      erb :'posts/new'
+    else
+      redirect to '/login'
+    end
+  end
+
+  posts '/posts' do
+    user = User.find_by_id(session[:user_id])
+    post = Post.new(content: params[:content])
+    user.posts << post
+    user.save
+    
+    redirect to '/move'
   end
 
   get '/posts/:id' do
@@ -32,7 +46,7 @@ class PostsController < ApplicationController
     post.content = params[:content]
     post.save
 
-    redirect to "posts/#{post.id}"
+    redirect to "/posts/#{post.id}"
   end
 
 end
