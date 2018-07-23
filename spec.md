@@ -11,7 +11,9 @@ Specs:
 - [x] Include more than one model class (list of model class names e.g. User, Post, Category)
       In my models folder you will find rb files for classes (1)Fitness_modality, (2)News, (3)Post, (4)User_Fitness_Modality, and (5)User.
 
-- [ ] Include at least one has_many relationship on your User model (x has_many y, e.g. User has_many Posts)
+- [x] Include at least one has_many relationship on your User model (x has_many y, e.g. User has_many Posts)
+      My user model contains three has many relationships. (1)has_many posts, (2)has_many user_fitness_modalities, and (3)has_many fitness_modalities.
+
 - [ ] Include at least one belongs_to relationship on another model (x belongs_to y, e.g. Post belongs_to User)
 - [ ] Include user accounts
 - [ ] Ensure that users can't modify content created by other users
