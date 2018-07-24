@@ -12,7 +12,7 @@ class RegistrationsController < ApplicationController
 
   get '/about_me' do
 
-    if Helpers.is_logged_in?(session) && Helpers.current_user(session).residence.empty?
+    if Helpers.is_logged_in?(session) && Helpers.current_user(session).residence == nil
       @user = User.find_by_id(session[:user_id])
 
       erb :'registrations/about_me'
@@ -39,25 +39,31 @@ class RegistrationsController < ApplicationController
   end
 
   post '/about_me' do
-    if !params[:residence].empty? && !params[:professional].empty? && !params[:fitness_level].empty?
+
+
+    if params[:residence].empty? || params[:professional].empty? || params[:fitness_level].empty? || (params[:modalities].empty? && params[:modality_name].empty?)
+
+      redirect to '/about_me'
+    else
+
       user = User.find_by_id(session[:user_id])
       user.update(residence: params[:residence], professional: params[:professional], fitness_level: params[:fitness_level])
 
-    if !params[:modalities].empty?
+    #if !params[:modalities].empty?
       params[:modalities].each do |modality_id|
         user.fitness_modalities << FitnessModality.find_by_id(modality_id)
       end
-    end
+    #end
 
-    if !params[:modality_name].empty?
+    #if !params[:modality_name].empty?
       user.fitness_modalities << FitnessModality.new(name: params[:modality_name])
-    end
+  #  end
 
       user.save
 
       redirect to '/move'
-    else
-      redirect to '/about_me'
+    #else
+    #  redirect to '/about_me'
     end
   end
 

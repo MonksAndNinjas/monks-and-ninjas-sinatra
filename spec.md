@@ -33,6 +33,12 @@ Specs:
       Posts contains get, post, patch, delete routes. User contains get, post, and patch routes, but not destroy.
 
 - [ ] Include user input validations
+      User activerecord table contains password_digest which allows user model to contain securd password. When user logs-in, in post login in users controller a user.authenticate method is used to make sure user exists and correct user information is brought up.
+
+      In post controller post /signup route, !params[:username].empty? && !params[:email].empty? && !params[:password].empty?, are used to make sure user does not submit empty information, otherwise redirected to signup again.
+
+      
+
 - [ ] Display validation failures to user with error message (example form URL e.g. /posts/new)
 - [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
