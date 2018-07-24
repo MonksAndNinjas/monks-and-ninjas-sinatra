@@ -1,11 +1,14 @@
 require './config/environment'
 
 class UsersController < ApplicationController
+  use Rack::Flash
 
   get '/login' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
       redirect to '/move'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+      flash[:message] = "Please complete registration"
+
       redirect to '/about_me'
     else
       erb :'sessions/login'
@@ -30,6 +33,8 @@ class UsersController < ApplicationController
 
       erb :move
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+      flash[:message] = "Please complete registration"
+
       redirect to '/about_me'
     else
       redirect to '/login'
@@ -42,6 +47,8 @@ class UsersController < ApplicationController
 
       erb :'users/show'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+      flash[:message] = "Please complete registration"
+
       redirect to '/about_me'
     else
       redirect to '/login'
@@ -54,6 +61,8 @@ class UsersController < ApplicationController
 
       erb :'/users/edit'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+      flash[:message] = "Please complete registration"
+
       redirect to '/about_me'
     else
       redirect to '/login'
