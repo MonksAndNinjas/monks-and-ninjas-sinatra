@@ -27,8 +27,11 @@ class RegistrationsController < ApplicationController
     end
   end
 
-  post '/signup' do  
-    if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
+  post '/signup' do
+    user = User.find_by(username: params[:username])
+    if user.email == params[:email]
+      redirect to '/signup'
+    elsif !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
       user = User.new(params)
       user.save
 
