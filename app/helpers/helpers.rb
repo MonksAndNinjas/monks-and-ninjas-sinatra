@@ -13,7 +13,7 @@ class Helpers
     @user
   end
 
-  def self.registered(arg)
+  def self.registered?(arg)
     @user = User.find(arg[:user_id])
     if @user.residence == nil
       false
