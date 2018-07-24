@@ -1,5 +1,9 @@
 <h1>Tell us about yourself <%= @user.username %>!</h1>
 
+<% if flash.has?(:message) %>
+  <p style="color:red;">*<%= flash[:message] %></p>
+<% end %>
+
 <form action="/about_me" method="POST">
   <label>Are you a fitness professional?</label>
 

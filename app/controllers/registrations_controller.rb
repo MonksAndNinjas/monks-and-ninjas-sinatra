@@ -7,6 +7,8 @@ class RegistrationsController < ApplicationController
     if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
       redirect to '/move'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+      flash[:message] = "Please complete registration"
+      
       redirect to '/about_me'
     else
       erb :'registrations/signup'
@@ -30,7 +32,7 @@ class RegistrationsController < ApplicationController
 
   post '/signup' do
     user = User.find_by(email: params[:email])
-    if user.slug == params[:username].gsub(" ", "-").downcase
+    if user && user.slug == params[:username].gsub(" ", "-").downcase
       flash[:message] = "Username or email already exists."
 
       redirect to '/signup'
@@ -42,20 +44,24 @@ class RegistrationsController < ApplicationController
 
       redirect to '/about_me'
     else
+      flash[:message] = "Please fill-in all the fields"
       redirect to '/signup'
     end
   end
 
   post '/about_me' do
     if params[:residence].empty? || params[:professional].empty? || params[:fitness_level].empty? || (params[:modalities] == nil && params[:modality_name].empty?)
+      flash[:message] = "Make sure to complete all fields, choose a specialty or fill-in a new specialty"
 
       redirect to '/about_me'
     else
       user = User.find_by_id(session[:user_id])
       user.update(residence: params[:residence], professional: params[:professional], fitness_level: params[:fitness_level])
 
-      params[:modalities].each do |modality_id|
-        user.fitness_modalities << FitnessModality.find_by_id(modality_id)
+      if params[:modalities] != nil
+        params[:modalities].each do |modality_id|
+          user.fitness_modalities << FitnessModality.find_by_id(modality_id)
+        end
       end
 
       if !params[:modality_name].empty?
