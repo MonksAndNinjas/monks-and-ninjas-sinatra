@@ -1,6 +1,7 @@
 require './config/environment'
 
 class RegistrationsController < ApplicationController
+  use Rack::Flash
 
   get '/signup' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
@@ -30,6 +31,8 @@ class RegistrationsController < ApplicationController
   post '/signup' do
     user = User.find_by(email: params[:email])
     if user.slug == params[:username].gsub(" ", "-").downcase
+      flash[:message] = "Username or email already exists."
+
       redirect to '/signup'
     elsif !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
       user = User.new(params)

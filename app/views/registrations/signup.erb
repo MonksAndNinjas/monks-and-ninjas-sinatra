@@ -1,5 +1,9 @@
 <h1>Sign Up to join our network, newsletter, and more!</h1>
 
+<% if flash.has?(:message) %>
+  <p style="color:red;">*<%= flash[:message] %></p>
+<% end %>
+
 <form action="/signup" method="POST">
   <label for="username">Username </label>
   <input type="text" name="username"><br>
