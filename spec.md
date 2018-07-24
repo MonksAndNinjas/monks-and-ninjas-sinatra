@@ -44,8 +44,11 @@ Specs:
 
       User cannot make duplicate account if username and email already exists.
 
-- [ ] Display validation failures to user with error message (example form URL e.g. /posts/new)
-- [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [x] Display validation failures to user with error message (example form URL e.g. /posts/new)
+      For logging out, editing user, creating new post, editing post, deleting post, incomplete registration, all have messages that let the user know if they successfully completed action or failed. All messages are handled by flash and session hashes.
+
+- [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+      
 
 Confirm
 - [ ] You have a large number of small Git commits

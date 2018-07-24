@@ -1,10 +1,10 @@
 # MartialArts
 
-Write description
+Welcome to Monks And Ninjas fitness site. Guests will see upcoming events, about us, teachers, and contact. If guest decides to signup, they will have access to our users section which includes connecting to our network of users, newsfeed, and posts. User will be able to create, destroy, read, and edit posts, as well as edit their account info. Sinatra and activerecord are used to create the dynamic site.
 
 ## Usage
 
-To use this app, clone, run rake db:migrate --- finish writing instructions ---
+To use this app, clone, run bundle install, rake db:migrate, and rake db:seed if would like to use the mock data. 
 
 ## Contributing
 
