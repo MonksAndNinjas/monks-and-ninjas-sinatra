@@ -1,5 +1,9 @@
 <h1>Log In</h1>
 
+<% if @logout %>
+  <p style="color:red;">*<%= @logout %></p>
+<% end %>
+
 <form action="/login" method="POST">
   <label for="username">Username </label>
   <input type="text" name="username"><br>

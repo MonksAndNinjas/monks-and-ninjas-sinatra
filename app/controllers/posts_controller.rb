@@ -5,8 +5,9 @@ class PostsController < ApplicationController
 
   get '/posts/new' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
+
       @fail = session[:error]
-      session[:error] = nil
+      session[:fail] = nil
 
       erb :'posts/new'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
@@ -29,7 +30,7 @@ class PostsController < ApplicationController
 
       redirect to '/move'
     else
-      session[:error] = "Cannot create empty post"
+      session[:fail] = "Cannot create empty post"
 
       redirect to '/posts/new'
     end
@@ -39,6 +40,9 @@ class PostsController < ApplicationController
     if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
       @post = Post.find_by_id(params[:id])
       @user = User.find_by_id(session[:user_id])
+
+      @success = session[:success]
+      session[:success] = nil
 
       erb :'posts/show'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
@@ -54,6 +58,9 @@ class PostsController < ApplicationController
     if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
       @post = Post.find_by_id(params[:id])
 
+      @fail = session[:fail]
+      session[:fail] = nil
+
       erb :'posts/edit'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
       flash[:message] = "Please complete registration"
@@ -66,15 +73,26 @@ class PostsController < ApplicationController
 
   patch '/posts/:id' do
     post = Post.find_by_id(params[:id])
-    post.content = params[:content]
-    post.save
 
-    redirect to "/posts/#{post.id}"
+    if !params[:content].empty?
+      post.content = params[:content]
+      post.save
+
+      session[:success] = "Successfully edited post"
+
+      redirect to "/posts/#{post.id}"
+    else
+      session[:fail] = "Cannot create empty post"
+
+      redirect to "/posts/#{post.id}/edit"
+    end
   end
 
   delete '/posts/:id/delete' do
     post = Post.find_by_id(params[:id])
     post.delete
+
+    session[:delete] = "Successfully deleted post"
 
     redirect to '/move'
   end

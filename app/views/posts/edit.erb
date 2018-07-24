@@ -1,5 +1,11 @@
 <h1>Post <%= @post.id %></h1>
 
+<% if @fail %>
+  <p style="color:red;">*<%= @fail %></p>
+<% elsif @success %>
+    <p style="color:red;">*<%= @success %></p>
+<% end %>
+
 <h2>posted by: <a href="/users/<%= User.find_by_id(@post.user_id).slug %>"><%= User.find_by_id(@post.user_id).username %></a></h2>
 
 <form action="/posts/<%= @post.id %>" method="POST">

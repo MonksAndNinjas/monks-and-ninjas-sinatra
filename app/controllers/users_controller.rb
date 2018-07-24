@@ -11,6 +11,9 @@ class UsersController < ApplicationController
 
       redirect to '/about_me'
     else
+      @logout = session[:logout]
+      session[:logout] = nil
+
       erb :'sessions/login'
     end
   end
@@ -31,6 +34,9 @@ class UsersController < ApplicationController
     if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
       @user = User.find_by_id(session[:user_id])
 
+      @delete = session[:delete]
+      session[:delete] = nil
+
       @success = session[:success]
       session[:success] = nil
 
@@ -47,6 +53,9 @@ class UsersController < ApplicationController
   get '/users/:slug' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
       @user = User.find_by_slug(params[:slug])
+
+      @success = session[:success]
+      session[:success] = nil
 
       erb :'users/show'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
@@ -91,11 +100,14 @@ class UsersController < ApplicationController
     end
     @user.save
 
+    session[:success] = "Successfully edited account"
+
     redirect to "/users/#{@user.slug}"
   end
 
   get '/logout' do
     session.clear
+    session[:logout] = "Successfully logged out"
 
     redirect to '/login'
   end
