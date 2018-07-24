@@ -12,11 +12,11 @@ class RegistrationsController < ApplicationController
 
   get '/about_me' do
 
-    if Helpers.is_logged_in?(session) && Helpers.current_user(session).residence == nil
+    if Helpers.is_logged_in?(session) && Helpers.current_user(session).residence == nil#change so that registration requires all data.
       @user = User.find_by_id(session[:user_id])
 
       erb :'registrations/about_me'
-    elsif Helpers.is_logged_in?(session) && !Helpers.current_user(session).residence.empty?
+    elsif Helpers.is_logged_in?(session) && !Helpers.current_user(session).residence.empty?#change so that registration requires all data
       @user = User.find_by_id(session[:user_id])
 
       redirect to "/users/#{@user.slug}"
@@ -39,31 +39,23 @@ class RegistrationsController < ApplicationController
   end
 
   post '/about_me' do
-
-
-    if params[:residence].empty? || params[:professional].empty? || params[:fitness_level].empty? || (params[:modalities].empty? && params[:modality_name].empty?)
-
+    if params[:residence].empty? || params[:professional].empty? || params[:fitness_level].empty? || (params[:modalities] == nil && params[:modality_name].empty?)
+      #requires all data to be filled out, need to make it so that if leave this site and come back without filling out data user will be navigated back to about_me to finish registration.
       redirect to '/about_me'
     else
 
       user = User.find_by_id(session[:user_id])
       user.update(residence: params[:residence], professional: params[:professional], fitness_level: params[:fitness_level])
 
-    #if !params[:modalities].empty?
       params[:modalities].each do |modality_id|
         user.fitness_modalities << FitnessModality.find_by_id(modality_id)
       end
-    #end
 
-    #if !params[:modality_name].empty?
       user.fitness_modalities << FitnessModality.new(name: params[:modality_name])
-  #  end
 
       user.save
 
       redirect to '/move'
-    #else
-    #  redirect to '/about_me'
     end
   end
 
