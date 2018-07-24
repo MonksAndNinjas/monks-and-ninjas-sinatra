@@ -31,6 +31,9 @@ class UsersController < ApplicationController
     if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
       @user = User.find_by_id(session[:user_id])
 
+      @success = session[:success]
+      session[:success] = nil
+
       erb :move
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
       flash[:message] = "Please complete registration"

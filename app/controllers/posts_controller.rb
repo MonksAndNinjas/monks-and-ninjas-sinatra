@@ -5,6 +5,8 @@ class PostsController < ApplicationController
 
   get '/posts/new' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
+      @fail = session[:error]
+      session[:error] = nil
 
       erb :'posts/new'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
@@ -23,9 +25,11 @@ class PostsController < ApplicationController
       user.posts << post
       user.save
 
+      session[:success] = "Successfully created post"
+
       redirect to '/move'
     else
-      flash[:message] = "Cannot create empty post"
+      session[:error] = "Cannot create empty post"
 
       redirect to '/posts/new'
     end

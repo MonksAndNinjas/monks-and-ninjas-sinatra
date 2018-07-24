@@ -45,7 +45,7 @@ class RegistrationsController < ApplicationController
       redirect to '/about_me'
     else
       flash[:message] = "Please fill-in all the fields"
-      
+
       redirect to '/signup'
     end
   end
