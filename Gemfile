@@ -13,4 +13,5 @@ group :development do
     gem 'tux'
     gem 'bcrypt'
     gem 'sqlite3'
+    gem 'rack-flash3'
 end
