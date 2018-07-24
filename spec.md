@@ -32,12 +32,15 @@ Specs:
 - [X] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
       Posts contains get, post, patch, delete routes. User contains get, post, and patch routes, but not destroy.
 
-- [ ] Include user input validations
+- [X] Include user input validations
       User activerecord table contains password_digest which allows user model to contain securd password. When user logs-in, in post login in users controller a user.authenticate method is used to make sure user exists and correct user information is brought up.
 
       In post controller post /signup route, !params[:username].empty? && !params[:email].empty? && !params[:password].empty?, are used to make sure user does not submit empty information, otherwise redirected to signup again.
 
-      
+
+      It is also required that user fills out about_me completely. Any empty slots will redirect the user back to about_me until completed. Even if they navigate to another website and back. This is handled by requiring Helpers.registered?(arg) to be true on any get route.
+
+      An empty fitness modality cannot be created because of code in post '/about_me'.
 
 - [ ] Display validation failures to user with error message (example form URL e.g. /posts/new)
 - [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
