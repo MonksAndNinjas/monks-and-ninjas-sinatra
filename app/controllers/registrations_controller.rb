@@ -52,7 +52,9 @@ class RegistrationsController < ApplicationController
         user.fitness_modalities << FitnessModality.find_by_id(modality_id)
       end
 
-      user.fitness_modalities << FitnessModality.new(name: params[:modality_name])
+      if !params[:modality_name].empty?
+        user.fitness_modalities << FitnessModality.new(name: params[:modality_name])
+      end
 
       user.save
 

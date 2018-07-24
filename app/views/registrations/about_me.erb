@@ -25,7 +25,9 @@
   <br></br>
 
   <% FitnessModality.all.each do |modality| %>
+  <% if !modality.name.empty? %>
     <input type="checkbox" name="modalities[]" value="<%= modality.id %>"><%= modality.name %></input><br>
+  <% end %>
   <% end %>
 
   <br></br>
