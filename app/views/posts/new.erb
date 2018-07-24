@@ -1,5 +1,8 @@
 <h1>Create a Post!</h1>
 
+<% if flash.has?(:message) %>
+  <p style="color:red;">*<%= flash[:message] %></p>
+<% end %>
 
 <form action="/posts" method="POST">
 

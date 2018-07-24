@@ -8,7 +8,7 @@ class RegistrationsController < ApplicationController
       redirect to '/move'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
       flash[:message] = "Please complete registration"
-      
+
       redirect to '/about_me'
     else
       erb :'registrations/signup'
@@ -45,6 +45,7 @@ class RegistrationsController < ApplicationController
       redirect to '/about_me'
     else
       flash[:message] = "Please fill-in all the fields"
+      
       redirect to '/signup'
     end
   end

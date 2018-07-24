@@ -17,12 +17,18 @@ class PostsController < ApplicationController
   end
 
   post '/posts' do
-    user = User.find_by_id(session[:user_id])
-    post = Post.new(content: params[:content])
-    user.posts << post
-    user.save
+    if !params[:content].empty?
+      user = User.find_by_id(session[:user_id])
+      post = Post.new(content: params[:content])
+      user.posts << post
+      user.save
 
-    redirect to '/move'
+      redirect to '/move'
+    else
+      flash[:message] = "Cannot create empty post"
+
+      redirect to '/posts/new'
+    end
   end
 
   get '/posts/:id' do
@@ -47,7 +53,7 @@ class PostsController < ApplicationController
       erb :'posts/edit'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
       flash[:message] = "Please complete registration"
-      
+
       redirect to '/about_me'
     else
       redirect to '/login'
