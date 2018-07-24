@@ -42,6 +42,8 @@ Specs:
 
       An empty fitness modality cannot be created because of code in post '/about_me'.
 
+      User cannot make duplicate account if username and email already exists.
+
 - [ ] Display validation failures to user with error message (example form URL e.g. /posts/new)
 - [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
