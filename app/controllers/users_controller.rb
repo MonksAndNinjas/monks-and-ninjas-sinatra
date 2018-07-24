@@ -3,8 +3,10 @@ require './config/environment'
 class UsersController < ApplicationController
 
   get '/login' do
-    if Helpers.is_logged_in?(session)
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
       redirect to '/move'
+    elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+      redirect to '/about_me'
     else
       erb :'sessions/login'
     end
@@ -23,30 +25,36 @@ class UsersController < ApplicationController
   end
 
   get '/move' do
-    if Helpers.is_logged_in?(session)
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
       @user = User.find_by_id(session[:user_id])
 
       erb :move
+    elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+      redirect to '/about_me'
     else
       redirect to '/login'
     end
   end
 
   get '/users/:slug' do
-    if Helpers.is_logged_in?(session)
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
       @user = User.find_by_slug(params[:slug])
 
       erb :'users/show'
+    elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+      redirect to '/about_me'
     else
       redirect to '/login'
     end
   end
 
   get '/users/:slug/edit' do
-    if Helpers.is_logged_in?(session)
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
       @user = User.find_by_slug(params[:slug])
 
       erb :'/users/edit'
+    elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+      redirect to '/about_me'
     else
       redirect to '/login'
     end
