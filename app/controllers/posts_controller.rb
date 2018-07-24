@@ -1,12 +1,15 @@
 require './config/environment'
 
 class PostsController < ApplicationController
+  use Rack::Flash
 
   get '/posts/new' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
 
       erb :'posts/new'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+      flash[:message] = "Please complete registration"
+
       redirect to '/about_me'
     else
       redirect to '/login'
@@ -29,6 +32,8 @@ class PostsController < ApplicationController
 
       erb :'posts/show'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+      flash[:message] = "Please complete registration"
+
       redirect to '/about_me'
     else
       redirect to '/login'
@@ -41,6 +46,8 @@ class PostsController < ApplicationController
 
       erb :'posts/edit'
     elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+      flash[:message] = "Please complete registration"
+      
       redirect to '/about_me'
     else
       redirect to '/login'
