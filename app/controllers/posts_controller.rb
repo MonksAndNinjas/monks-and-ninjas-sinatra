@@ -59,7 +59,6 @@ class PostsController < ApplicationController
   get '/posts/:id' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @post = Post.find_by_id(params[:id])                #do I just need user?
-      @user = User.find_by_id(session[:user_id])
 
       @success = session[:success]                        #from patch '/posts/:id', post failed
       session[:success] = nil
