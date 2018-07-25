@@ -1,5 +1,4 @@
 class Helpers
-
   def self.is_logged_in?(arg)
     if arg[:user_id] != nil
       true
@@ -13,7 +12,7 @@ class Helpers
     @user
   end
 
-  def self.registered?(arg)
+  def self.registered?(arg)                         #has the user completed the about_me section
     @user = User.find(arg[:user_id])
     if @user.residence == nil
       false
@@ -21,14 +20,14 @@ class Helpers
       false
     elsif @user.fitness_level == nil
       false
-    elsif @user.fitness_modalities.size == 0
+    elsif @user.fitness_modalities == nil
       false
     else
       true
     end
   end
 
-  def self.valid_data?(arg)
+  def self.valid_data?(arg)                         #does params from get '/about_me' contain valid information
     if arg[:residence].empty?
       false
     elsif arg[:professional].empty?
@@ -39,7 +38,6 @@ class Helpers
       false
     else
       true
-    end  
+    end
   end
-
 end
