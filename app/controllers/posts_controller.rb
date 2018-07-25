@@ -1,6 +1,7 @@
 require './config/environment'
 
 class PostsController < ApplicationController
+  use Rack::Flash
 #session {:fail, :success} are used as user validation messages
   get '/posts/new' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
@@ -72,7 +73,6 @@ class PostsController < ApplicationController
 
   patch '/posts/:id' do
     post = Post.find_by_id(params[:id])
-
     if !params[:content].empty?
       post.content = params[:content]
       post.save

@@ -28,4 +28,18 @@ class Helpers
     end
   end
 
+  def self.valid_data?(arg)
+    if arg[:residence].empty?
+      false
+    elsif arg[:professional].empty?
+      false
+    elsif arg[:fitness_level].empty?
+      false
+    elsif arg[:fitness_modalities] == nil && arg[:fitness_name].empty?
+      false
+    else
+      true
+    end  
+  end
+
 end

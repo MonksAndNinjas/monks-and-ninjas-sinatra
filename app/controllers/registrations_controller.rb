@@ -4,9 +4,9 @@ class RegistrationsController < ApplicationController
   use Rack::Flash
 
   get '/signup' do
-    if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       redirect to '/move'
-    elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
       flash[:message] = "Please complete registration"
 
       redirect to '/about_me'
@@ -16,15 +16,14 @@ class RegistrationsController < ApplicationController
   end
 
   get '/about_me' do
-
-    if Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
-      @user = User.find_by_id(session[:user_id])
-
-      erb :'registrations/about_me'
-    elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @user = User.find_by_id(session[:user_id])
 
       redirect to "/users/#{@user.slug}"
+    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
+      @user = User.find_by_id(session[:user_id])
+
+      erb :'registrations/about_me'
     else
       redirect to '/login'
     end
@@ -33,12 +32,11 @@ class RegistrationsController < ApplicationController
   post '/signup' do
     user = User.find_by(email: params[:email])
     if user && user.slug == params[:username].gsub(" ", "-").downcase
-      flash[:message] = "Username or email already exists."
+      flash[:message] = "Account already exists."
 
       redirect to '/signup'
     elsif !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
-      user = User.new(params)
-      user.save
+      user = User.create(params)
 
       session[:user_id] = user.id
 
@@ -51,14 +49,13 @@ class RegistrationsController < ApplicationController
   end
 
   post '/about_me' do
-    if params[:residence].empty? || params[:professional].empty? || params[:fitness_level].empty? || (params[:modalities] == nil && params[:modality_name].empty?)
+    if Helpers.valid_data?(params)
       flash[:message] = "Make sure to complete all fields, choose a specialty or fill-in a new specialty"
 
       redirect to '/about_me'
     else
       user = User.find_by_id(session[:user_id])
       user.update(residence: params[:residence], professional: params[:professional], fitness_level: params[:fitness_level])
-
       if params[:modalities] != nil
         params[:modalities].each do |modality_id|
           user.fitness_modalities << FitnessModality.find_by_id(modality_id)
@@ -68,7 +65,6 @@ class RegistrationsController < ApplicationController
       if !params[:modality_name].empty?
         user.fitness_modalities << FitnessModality.new(name: params[:modality_name])
       end
-
       user.save
 
       redirect to '/move'
