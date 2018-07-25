@@ -7,7 +7,7 @@ gem 'rake'
 gem 'thin'
 gem 'require_all'
 
-group :development do
+group :development do           #do I need to put in development, ask
     gem 'shotgun'
     gem 'pry'
     gem 'tux'
