@@ -3,7 +3,7 @@ require './config/environment'
 class MonksAndNinjasController < ApplicationController
 # these are the non-user routes
   get '/' do
-    erb :home
+    erb :index
   end
 
   get '/about' do
