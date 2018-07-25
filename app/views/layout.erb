@@ -2,31 +2,48 @@
 <html>
   <head>
     <title>Monks And Ninjas</title>
+    <style>
+      div:first-child {display: block; position: absolute; width: 100%; text-align: center;}
+      div.container {margin-left: 40px; margin-right: 40px;}
+      div.header a {display: inline-block; text-indent: 40px; color: black; text-decoration: none;}
+
+      nav a:visited {color: grey;}
+      nav a:hover {color: blue;}
+
+      a {text-decoration: none;}
+
+      img {display: block; margin-left: auto; margin-right: auto; opacity: 0.25; }
+    </style>
+
   </head>
   <body>
 
-    <h1>Monks And Ninjas</h1>
+    <div class="header">
+      <nav>
+        <a href="/about">About</a>
+        <a href="/teachers">Teachers</a>
+        <a href="/contact">Contact</a>
+        <a href="/events">Classes and Retreats</a>
+      <% if Helpers.is_logged_in?(session) %>
+        <a href="/move">Move</a>
+        <a href="/users/<%= Helpers.current_user(session).slug %>">Account</a>
+        <a href="/logout">Logout <%= Helpers.current_user(session).username %></a>
+      <% else %>
+        <a href="/signup">Sign Up</a>
+        <a href="/login">Log In</a>
+      <% end %>
+      </nav>
 
-    <a href="/about">About</a><br>
-    <a href="/teachers">Teachers</a><br>
-    <a href="/contact">Contact</a><br>
-    <a href="/events">Classes and Retreats</a><br>
+      <h1><a href="/">Monks And Ninjas</a></h1>
+    </div>
 
-    <% if Helpers.is_logged_in?(session) %>
-      <a href="/move">Move</a><br>
-      <a href="/users/<%= Helpers.current_user(session).slug %>">Account</a><br>
-      <a href="/logout">Logout <%= Helpers.current_user(session).username %></a>
-    <% else %>
-      <a href="/signup">Sign Up</a><br>
-      <a href="/login">Log In</a>
-    <% end %>
-
+    <br></br>
+    <br></br>
+    <br></br>
     <br></br>
 
     <div class="container">
-
     <%= yield %>
-
     </div>
 
   </body>
