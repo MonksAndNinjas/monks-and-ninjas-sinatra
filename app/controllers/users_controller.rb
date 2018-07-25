@@ -29,26 +29,6 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/move' do                                          #main user site, might consider moving to posts and changing name to post so not confusing
-    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
-      @user = User.find_by_id(session[:user_id])
-
-      @delete = session[:delete]                          #from delete '/posts/:id/delete'    - should redirect to get '/users/:slug'
-      session[:delete] = nil
-
-      @success = session[:success]                        #from patch '/users/:slug', edited user account   - should redirect to get '/users/:slug'
-      session[:success] = nil
-
-      erb :move
-    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
-      flash[:message] = "Please complete registration"
-
-      redirect to '/about_me'
-    else
-      redirect to '/login'
-    end
-  end
-
   get '/users/:slug' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @user = User.find_by_slug(params[:slug])

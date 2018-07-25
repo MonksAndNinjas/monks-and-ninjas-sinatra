@@ -3,6 +3,26 @@ require './config/environment'
 class PostsController < ApplicationController
   use Rack::Flash
 #session {:fail, :success} are used as user validation messages
+  get '/move' do                                          #is intended to represent get '/posts', but thought '/move' better suited
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
+      @user = User.find_by_id(session[:user_id])
+
+      @delete = session[:delete]                          #from delete '/posts/:id/delete'
+      session[:delete] = nil
+
+      @success = session[:success]                        #from post '/posts', created post
+      session[:success] = nil
+
+      erb :'posts/index'
+    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
+      flash[:message] = "Please complete registration"
+
+      redirect to '/about_me'
+    else
+      redirect to '/login'
+    end
+  end
+
   get '/posts/new' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
 
