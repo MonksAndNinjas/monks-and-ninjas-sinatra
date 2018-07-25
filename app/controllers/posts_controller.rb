@@ -1,16 +1,15 @@
 require './config/environment'
 
 class PostsController < ApplicationController
-  use Rack::Flash
 
   get '/posts/new' do
-    if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
 
-      @fail = session[:error]
+      @fail = session[:fail]                        #from post '/posts', prevents empty post
       session[:fail] = nil
 
       erb :'posts/new'
-    elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
       flash[:message] = "Please complete registration"
 
       redirect to '/about_me'

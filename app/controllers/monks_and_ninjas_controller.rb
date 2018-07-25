@@ -1,7 +1,7 @@
 require './config/environment'
 
-class MonksAndNinjasController < ApplicationController #inherit from
-
+class MonksAndNinjasController < ApplicationController
+# these are the non-user routes
   get '/' do
     erb :home
   end
@@ -21,6 +21,5 @@ class MonksAndNinjasController < ApplicationController #inherit from
   get '/events' do
     erb :'monksandninjas/events'
   end
-
 
 end
