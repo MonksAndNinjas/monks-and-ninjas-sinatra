@@ -1,11 +1,11 @@
 require './config/environment'
 
 class PostsController < ApplicationController
-
+#session {:fail, :success} are used as user validation messages
   get '/posts/new' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
 
-      @fail = session[:fail]                        #from post '/posts', prevents empty post
+      @fail = session[:fail]                               #from post '/posts', prevents empty post
       session[:fail] = nil
 
       erb :'posts/new'
@@ -36,15 +36,15 @@ class PostsController < ApplicationController
   end
 
   get '/posts/:id' do
-    if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
-      @post = Post.find_by_id(params[:id])
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
+      @post = Post.find_by_id(params[:id])                #do I just need user?
       @user = User.find_by_id(session[:user_id])
 
-      @success = session[:success]
+      @success = session[:success]                        #from patch '/posts/:id', post failed
       session[:success] = nil
 
       erb :'posts/show'
-    elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
       flash[:message] = "Please complete registration"
 
       redirect to '/about_me'
@@ -54,14 +54,14 @@ class PostsController < ApplicationController
   end
 
   get '/posts/:id/edit' do
-    if Helpers.is_logged_in?(session) && Helpers.registered?(session) == true
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @post = Post.find_by_id(params[:id])
 
-      @fail = session[:fail]
+      @fail = session[:fail]                               #from patch '/posts/:id', post created
       session[:fail] = nil
 
       erb :'posts/edit'
-    elsif Helpers.is_logged_in?(session) && Helpers.registered?(session) == false
+    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
       flash[:message] = "Please complete registration"
 
       redirect to '/about_me'
