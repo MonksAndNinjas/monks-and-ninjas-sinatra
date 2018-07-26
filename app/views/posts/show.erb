@@ -1,12 +1,16 @@
-<h1>Post <%= @post.id %></h1>
-
 <% if @success %>
   <p style="color:red;">*<%= @success %></p>
 <% end %>
 
-<h2>posted by: <a href="/users/<%= User.find_by_id(@post.user_id).slug %>"><%= User.find_by_id(@post.user_id).username %></a></h2>
+<section class="posts-show">
+  <span>post <%= @post.id %></span><br>
+  <h3>posted by: <a href="/users/<%= User.find_by_id(@post.user_id).slug %>"><%= User.find_by_id(@post.user_id).username %></a></h3>
 
-<p><%= @post.content %></p>
+  <br></br>
+
+  <p><%= @post.content %></p>
+</section>
+
 
 <% if Helpers.current_user(session).id == @post.user_id %>
   <a href="/posts/<%= @post.id %>/edit">Edit Post</a>
