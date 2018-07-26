@@ -4,39 +4,27 @@
 
 <h1><%= @user.username %></h1>
 
-<ul>
-  <% if Helpers.current_user(session).id == @user.id %>
+<section class="about-user">
+  <ul>
+    <% if Helpers.current_user(session).id == @user.id %>
     <li>Email: <%= @user.email %></li>
-
-    <br></br>
-  <% end %>
-
-  <li>Residence: <%= @user.residence %></li>
-
-  <br></br>
-
-  <li>Fitness Level: <%= @user.fitness_level %></li>
-
-  <br></br>
-
-  <li>Fitness Professional:
+    <% end %>
+    <li>Residence: <%= @user.residence %></li>
+    <li>Fitness Level: <%= @user.fitness_level %></li>
+    <li>Fitness Professional:
     <% if @user.professional %>
       Yes</li>
     <% else %>
       No</li>
     <% end %>
-
-  <br></br>
-
-  <li>Fitness Specialties: </li>
-  <ul>
+    <li>Fitness Specialties: </li>
+    <ul>
     <% @user.fitness_modalities.each do |modality| %>
       <li><%= modality.name %></li>
     <% end %>
+    </ul>
   </ul>
-</ul>
-
-<br></br>
+</section>
 
 <% if Helpers.current_user(session).id == @user.id %>
   <a href="/users/<%= Helpers.current_user(session).slug %>/edit">Edit Account</a>
@@ -52,14 +40,14 @@
 
 <h3>Your Posts</h3>
 
-<% @user.posts.each do |post| %>
-  <label><a href="/posts/<%= post.id %>">Post <%= post.id %></a></label>
-  <ul>
-    <li><%= post.content %></li>
-  </ul>
-<% end %>
-
-<br></br>
+<section class="user-posts">
+  <% @user.posts.each do |post| %>
+    <label><a href="/posts/<%= post.id %>">Post <%= post.id %></a></label>
+    <ul>
+      <li><%= post.content %></li>
+    </ul>
+  <% end %>
+</section>
 
 <% if Helpers.current_user(session).id == @user.id %>
   <a href="/posts/new">Create New Post</a>
