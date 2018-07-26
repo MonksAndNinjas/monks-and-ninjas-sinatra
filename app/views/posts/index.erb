@@ -21,7 +21,6 @@
 
 <ul>
   <% Post.all.each do |post| %>
-
     <label><a href="/users/<%= User.find_by_id(post.user_id).slug %>"><%= User.find_by_id(post.user_id).username %></a></label>
     <ul>
       <li><%= post.content %><a href="/posts/<%= post.id %>"> ~></a></li>
@@ -34,11 +33,14 @@
 
 <ul>
   <% User.all.each do |user| %>
-    <li><a href="/users/<%= user.slug %>"><%= user.username %></a></li>
-    <ul>
-      <% user.fitness_modalities.each do |modality| %>
-        <li><%= modality.name %></li>
-      <% end %><br>
-    </ul>
+    <% if user.fitness_modalities.size != 0 %> 
+    <!-- does not display users with unfinished registrations -->
+      <li><a href="/users/<%= user.slug %>"><%= user.username %></a></li>
+      <ul>
+        <% user.fitness_modalities.each do |modality| %>
+          <li><%= modality.name %></li>
+        <% end %><br>
+      </ul>
+    <% end %>
   <% end %>
 </ul>
