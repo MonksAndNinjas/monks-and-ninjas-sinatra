@@ -10,7 +10,7 @@
   <% News.all.each do |news| %>
     <label><%= news.title %></label>
     <ul>
-      <li><%= news.content %><a href="I lead nowhere">Read more</a></li>
+      <li><%= news.content %><a href="I lead nowhere"> Read more</a></li>
     </ul>
 
     <br></br>
@@ -24,7 +24,7 @@
 
     <label><a href="/users/<%= User.find_by_id(post.user_id).slug %>"><%= User.find_by_id(post.user_id).username %></a></label>
     <ul>
-      <li><%= post.content %><a href="/posts/<%= post.id %>">--></a></li>
+      <li><%= post.content %><a href="/posts/<%= post.id %>"> ~></a></li>
     </ul>
     <br></br>
   <% end %>
