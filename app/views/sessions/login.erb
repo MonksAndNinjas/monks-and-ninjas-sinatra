@@ -2,6 +2,8 @@
 
 <% if @logout %>
   <p style="color:red;">*<%= @logout %></p>
+<% elsif @fail %>
+  <p style="color:red;">*<%= @fail %></p>
 <% end %>
 
 <form action="/login" method="POST">

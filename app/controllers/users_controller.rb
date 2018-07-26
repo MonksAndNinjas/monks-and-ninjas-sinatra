@@ -2,7 +2,7 @@ require './config/environment'
 
 class UsersController < ApplicationController
   use Rack::Flash
-  #session {:logout, :success, :delete} is used as user validation message
+  #session {:logout, :success, :delete, :fail} is used as user validation message
   get '/login' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       redirect to '/move'
@@ -13,6 +13,9 @@ class UsersController < ApplicationController
     else
       @logout = session[:logout]                              #from get '/logout'
       session[:logout] = nil
+
+      @fail = session[:fail]
+      session[:fail] = nil
 
       erb :'sessions/login'
     end
@@ -25,6 +28,8 @@ class UsersController < ApplicationController
 
       redirect to '/move'
     else
+      session[:fail] = "Invalid username or password"
+
       redirect to '/login'
     end
   end
