@@ -2,7 +2,7 @@
   <p style="color:red;">*<%= @success %></p>
 <% end %>
 
-<section class="posts-show">
+<section class="posts">
   <span>post <%= @post.id %></span><br>
   <h3>posted by: <a href="/users/<%= User.find_by_id(@post.user_id).slug %>"><%= User.find_by_id(@post.user_id).username %></a></h3>
 
