@@ -36,7 +36,8 @@ class MovementsController < ApplicationController
     params[:exercises].each do |exercise|
       user.exercises << exercise
     end
-
+    user.save
+    
     redirect to '/movements'
   end
 
