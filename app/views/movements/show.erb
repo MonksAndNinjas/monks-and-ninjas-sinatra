@@ -1,0 +1,7 @@
+<h1><%= @movement.name %></h1>
+
+<ul>
+<% @movement.name.exercises.each do |exercise| %>
+  <li><%= exercise.name %></li>
+<% end %>
+</ul>

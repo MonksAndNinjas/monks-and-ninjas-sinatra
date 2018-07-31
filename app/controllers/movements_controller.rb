@@ -16,5 +16,10 @@ class MovementsController < ApplicationController
       redirect to '/login'
     end
   end
-  
+
+  get '/movements/:name' do
+    @movement = Movement.find_by(name: params[:name])
+    erb :'movements/show'
+  end
+
 end

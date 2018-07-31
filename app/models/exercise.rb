@@ -1,3 +1,3 @@
 class Movement < ActiveRecord::Base
-  has_many :exercises
+  belongs_to :movement
 end
