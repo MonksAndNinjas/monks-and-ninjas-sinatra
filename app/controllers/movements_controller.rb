@@ -16,5 +16,5 @@ class MovementsController < ApplicationController
       redirect to '/login'
     end
   end
-  end
+  
 end
