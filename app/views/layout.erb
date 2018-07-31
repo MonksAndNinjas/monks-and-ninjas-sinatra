@@ -44,7 +44,8 @@
         <a href="/contact">Contact</a>
         <a href="/events">Classes and Retreats</a>
       <% if Helpers.is_logged_in?(session) %>
-        <a href="/move">Move</a>
+        <a href="/posts">Connect</a>
+        <a href="/movements">Movements</a>
         <a href="/users/<%= Helpers.current_user(session).slug %>">Account</a>
         <a href="/logout">Logout <%= Helpers.current_user(session).username %></a>
       <% else %>
