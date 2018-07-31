@@ -1,7 +1,7 @@
-<h1><%= @movement.name %></h1>
+<span><%= @movement.name %></span>
 
 <ul>
-<% @movement.name.exercises.each do |exercise| %>
-  <li><%= exercise.name %></li>
+<% @movement.exercises.each do |exercise| %>
+  <li><%= exercise.desc %></li>
 <% end %>
 </ul>
