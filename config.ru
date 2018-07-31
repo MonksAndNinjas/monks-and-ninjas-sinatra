@@ -6,5 +6,6 @@ use MonksAndNinjasController
 use RegistrationsController
 use UsersController
 use PostsController
+use MovementsController
 
 run ApplicationController
