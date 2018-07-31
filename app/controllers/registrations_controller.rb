@@ -50,6 +50,7 @@ class RegistrationsController < ApplicationController
 
   post '/about_me' do
     if !Helpers.valid_data?(params)
+
       flash[:message] = "Make sure to complete all fields, choose a specialty or fill-in a new specialty"
 
       redirect to '/about_me'

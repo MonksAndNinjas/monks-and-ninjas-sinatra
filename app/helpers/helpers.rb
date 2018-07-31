@@ -28,11 +28,11 @@ class Helpers
   end
 
   def self.valid_data?(arg)                         #does params from get '/about_me' contain valid information
-    if arg[:residence] == nil
+    if arg[:residence].empty?
       false
     elsif arg[:professional] == nil
       false
-    elsif arg[:fitness_level] == nil
+    elsif arg[:fitness_level].empty?
       false
     elsif arg[:modalities] == nil && arg[:modality_name].empty?
       false
