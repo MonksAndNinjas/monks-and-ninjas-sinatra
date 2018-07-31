@@ -31,4 +31,13 @@ class MovementsController < ApplicationController
     end
   end
 
+  post '/movements' do
+    user = Helpers.current_user(session)
+    params[:exercises].each do |exercise|
+      user.exercises << exercise
+    end
+
+    redirect to '/movements'
+  end
+
 end

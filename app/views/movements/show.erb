@@ -3,7 +3,7 @@
 <section class="movement-show">
   <form action="/movements/:name" method="POST">
   <% @movement.exercises.each do |exercise| %>
-    <input type="checkbox" name="exercise"><%= exercise.desc %></input>
+    <input type="checkbox" name="exercises[]" value="<%= exercise.id %>"><%= exercise.desc %></input>
   <% end %>
 
   <br></br>
