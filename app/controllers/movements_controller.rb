@@ -33,11 +33,12 @@ class MovementsController < ApplicationController
 
   post '/movements' do
     user = Helpers.current_user(session)
-    params[:exercises].each do |exercise|
-      user.exercises << exercise
+    params[:exercises].each do |exercise_id|
+      exercise = Exercise.find_by_id(exercise_id)
+      user.exercises <<  exercise if !user.exercises.include?(exercise)
     end
     user.save
-    
+
     redirect to '/movements'
   end
 

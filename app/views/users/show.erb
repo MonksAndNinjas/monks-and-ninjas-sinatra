@@ -38,6 +38,16 @@
   <br></br>
 <% end %>
 
+<section class="moves">
+  <h3>Your Movements</h3>
+  <ul>
+  <% @user.exercises.each do |exercise| %>
+    <% movement = Movement.find_by_id(exercise.movement_id) %>
+    <li><a href="/movements/<%= movement.name %>"><%= exercise.desc %></a></li>
+  <% end %>
+  </ul>
+</section>
+
 <h3>Your Posts</h3>
 
 <section class="user-posts">

@@ -1,9 +1,10 @@
 <h1><%= @movement.name %></h1>
 
 <section class="movement-show">
-  <form action="/movements/:name" method="POST">
+  <form action="/movements" method="POST">
   <% @movement.exercises.each do |exercise| %>
-    <input type="checkbox" name="exercises[]" value="<%= exercise.id %>"><%= exercise.desc %></input>
+    <input type="checkbox" name="exercises[]" value="<%= exercise.id %>" <%= 'checked' if Helpers.current_user(session).exercises.include?(exercise) %>><%= exercise.desc %></input>
+
   <% end %>
 
   <br></br>
