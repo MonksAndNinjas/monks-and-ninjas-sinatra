@@ -1,3 +1,3 @@
-class Movements < ActiveRecord::Base
+class Movement < ActiveRecord::Base
 
 end

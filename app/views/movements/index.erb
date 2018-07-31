@@ -1,58 +1,49 @@
 <section id="movement">
   <h1>Find Your Movement</h1>
   <h3>By body part:</h3>
+
   <table>
     <tr>
       <th>Head</th>
-      <td>Neck</td>
-      <td>Nose</td>
-      <td>Ears</td>
-      <td>Mouth</td>
-      <td>Eyes</td>
-      <td>Chin</td>
-      <td>Forehead</td>
-      <td>Face</td>
-      <td>
+    <% Movement.all.each do |move| %>
+      <% if move.section == "Head" %>
+      <td><a href="/movement/<%= move.name %>"><%= move.name %></a></td>
+      <% end %>
+    <% end %>
     </tr>
+
     <tr>
       <th>Upper Body</th>
-      <td>Shoulders</td>
-      <td>Chest</td>
-      <td>Upper Back</td>
-      <td>Upper Arm</td>
-      <td>Forearm</td>
-      <td>Hands</td>
+      <% Movement.all.each do |move| %>
+        <% if move.section == "Upper_Body" %>
+        <td><a href="/movement/<%= move.name %>"><%= move.name %></a></td>
+        <% end %>
+      <% end %>
     </tr>
     <tr>
       <th>Core</th>
-      <td>Abdominals</td>
-      <td>Lower Back</td>
-      <td>Obliques</td>
-      <td>Transverse</td>
+      <% Movement.all.each do |move| %>
+        <% if move.section == "Core" %>
+        <td><a href="/movement/<%= move.name %>"><%= move.name %></a></td>
+        <% end %>
+      <% end %>
     </tr>
     <tr>
       <th>Lower Body</th>
-      <td>Hips</td>
-      <td>Upper Leg</td>
-      <td>Lower Leg</td>
-      <td>Feet</td>
+      <% Movement.all.each do |move| %>
+        <% if move.section == "Lower_Body" %>
+        <td><a href="/movement/<%= move.name %>"><%= move.name %></a></td>
+        <% end %>
+      <% end %>
     </tr>
   </table>
 
   <h3>or, by style of movement:</h3>
   <ul>
-    <li>Total Body</li>
-    <li>Strength</li>
-    <li>Endurence</li>
-    <li>Power/Plyo</li>
-    <li>Body Weight</li>
-    <li>Climbing</li>
-    <li>Swimming</li>
-    <li>Gracefulness</li>
-    <li>Mediation</li>
-    <li>Mobility</li>
-    <li>Balance</li>
-    <li>Iron Body</li>
-    <li>Tumbling</li>
+    <% Movement.all.each do |move| %>
+      <% if move.section == "Movement" %>
+      <li><a href="/movement/<%= move.name %>"><%= move.name %></a></li>
+      <% end %>
+    <% end %>
   </ul>
 </section>
