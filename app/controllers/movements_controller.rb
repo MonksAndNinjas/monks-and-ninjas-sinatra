@@ -18,8 +18,17 @@ class MovementsController < ApplicationController
   end
 
   get '/movements/:name' do
-    @movement = Movement.find_by(name: params[:name])
-    erb :'movements/show'
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
+      @movement = Movement.find_by(name: params[:name])
+
+      erb :'movements/show'
+    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
+      flash[:message] = "Please complete registration"
+
+      redirect to '/about_me'
+    else
+      redirect to '/login'
+    end
   end
 
 end
