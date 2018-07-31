@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   #session {:logout, :success, :delete, :fail} is used as user validation message
   get '/login' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
-      redirect to '/move'
+      redirect to '/posts'
     elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
       flash[:message] = "Please complete registration"
 
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
 
-      redirect to '/move'
+      redirect to '/posts'
     else
       session[:fail] = "Invalid username or password"
 

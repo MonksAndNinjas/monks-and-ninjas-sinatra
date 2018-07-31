@@ -3,7 +3,7 @@ require './config/environment'
 class PostsController < ApplicationController
   use Rack::Flash
 #session {:fail, :success} are used as user validation messages
-  get '/move' do                                          #is intended to represent get '/posts', but thought '/move' better suited
+  get '/posts' do                                          #is intended to represent get '/posts', but thought '/move' better suited
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @user = User.find_by_id(session[:user_id])
 
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
 
       session[:success] = "Successfully created post"
 
-      redirect to '/move'
+      redirect to '/posts'
     else
       session[:fail] = "Cannot create empty post"
 
@@ -112,7 +112,7 @@ class PostsController < ApplicationController
 
     session[:delete] = "Successfully deleted post"
 
-    redirect to '/move'
+    redirect to '/posts'
   end
 
 end

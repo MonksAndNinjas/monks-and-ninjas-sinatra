@@ -5,7 +5,7 @@ class RegistrationsController < ApplicationController
 
   get '/signup' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
-      redirect to '/move'
+      redirect to '/posts'
     elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
       flash[:message] = "Please complete registration"
 
@@ -68,7 +68,7 @@ class RegistrationsController < ApplicationController
       end
       user.save
 
-      redirect to '/move'
+      redirect to '/posts'
     end
   end
 
