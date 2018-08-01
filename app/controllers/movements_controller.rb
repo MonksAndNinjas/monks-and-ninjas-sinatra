@@ -21,6 +21,9 @@ class MovementsController < ApplicationController
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @movement = Movement.find_by(name: params[:name])
 
+      @success = session[:success]
+      session[:success] = nil
+
       erb :'movements/show'
     elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
       flash[:message] = "Please complete registration"
@@ -34,6 +37,7 @@ class MovementsController < ApplicationController
   get '/movements/:name/new' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @movement = Movement.find_by(name: params[:name])
+
       @fail = session[:fail]
       session[:fail] = nil
 
@@ -61,6 +65,23 @@ class MovementsController < ApplicationController
       session[:fail] = "Cannot add empty or existing exercise"
 
       redirect to "/movements/#{@movement.name}/new"
+    end
+  end
+
+  get '/movements/:name/edit' do
+    @movement = Movement.find_by(name: params[:name])
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
+
+      @fail = session[:fail]                               
+      session[:fail] = nil
+
+      erb :'movements/edit'
+    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
+      flash[:message] = "Please complete registration"
+
+      redirect to '/about_me'
+    else
+      redirect to '/login'
     end
   end
 
