@@ -18,7 +18,19 @@ class MovementsController < ApplicationController
   end
 
   get '/movements/new' do
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
 
+      #@fail = session[:fail]                               #from post '/posts', prevents empty post
+      #session[:fail] = nil
+
+      erb :'movements/new'
+    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
+      #flash[:message] = "Please complete registration"
+
+      redirect to '/about_me'
+    else
+      redirect to '/login'
+    end
   end
 
   post '/movements' do
