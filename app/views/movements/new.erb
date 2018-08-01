@@ -1,0 +1,14 @@
+<h1>Add to <%= @movement.name %></h1>
+
+<% if @fail %>
+  <p style="color:red;">*<%= @fail %></p>
+<% end %>
+
+<form action="/movements/<%= @movement.name %>" method="POST">
+  <label>Exercise</label>
+  <input type="text" name="exercise">
+
+  <br></br>
+
+  <input type="submit" value="Add">
+</form>

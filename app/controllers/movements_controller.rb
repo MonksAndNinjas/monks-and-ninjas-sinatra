@@ -17,33 +17,6 @@ class MovementsController < ApplicationController
     end
   end
 
-  get '/movements/new' do
-    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
-
-      #@fail = session[:fail]                               #from post '/posts', prevents empty post
-      #session[:fail] = nil
-
-      erb :'movements/new'
-    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
-      #flash[:message] = "Please complete registration"
-
-      redirect to '/about_me'
-    else
-      redirect to '/login'
-    end
-  end
-
-  post '/movements' do
-    user = Helpers.current_user(session)
-    params[:exercises].each do |exercise_id|
-      exercise = Exercise.find_by_id(exercise_id)
-      user.exercises <<  exercise if !user.exercises.include?(exercise)
-    end
-    user.save
-
-    redirect to '/movements'
-  end
-
   get '/movements/:name' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @movement = Movement.find_by(name: params[:name])
@@ -55,6 +28,39 @@ class MovementsController < ApplicationController
       redirect to '/about_me'
     else
       redirect to '/login'
+    end
+  end
+
+  get '/movements/:name/new' do
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
+      @movement = Movement.find_by(name: params[:name])
+      @fail = session[:fail]
+      session[:fail] = nil
+
+      erb :'movements/new'
+    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
+      flash[:message] = "Please complete registration"
+
+      redirect to '/about_me'
+    else
+      redirect to '/login'
+    end
+  end
+
+  post '/movements/:name' do
+    @movement = Movement.find_by(name: params[:name])
+    @exercise = Exercise.new(desc: params[:exercise])
+    if !params[:exercise].empty? && @exercise == nil
+      @movement.exercises << @exercise
+      movement.save
+
+      session[:success] = "Successfully added exercise"
+
+      redirect to "/movements/#{@movement.name}"
+    else
+      session[:fail] = "Cannot add empty or existing exercise"
+
+      redirect to "/movements/#{@movement.name}/new"
     end
   end
 
