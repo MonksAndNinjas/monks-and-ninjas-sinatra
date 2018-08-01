@@ -71,6 +71,7 @@ class MovementsController < ApplicationController
   get '/movements/:slug/:id' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @exercise = Exercise.find_by_id(params[:id])
+      @movement = Movement.find_by_slug_movement(params[:slug])
 
       @success = session[:success]
       session[:success] = nil
@@ -85,7 +86,7 @@ class MovementsController < ApplicationController
     end
   end
 
-  get '/movements/:slug/edit' do
+  get '/movements/:slug/:id/edit' do
     @movement = Movement.find_by_slug_movement(params[:slug])
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
 
@@ -99,6 +100,22 @@ class MovementsController < ApplicationController
       redirect to '/about_me'
     else
       redirect to '/login'
+    end
+  end
+
+  patch '/movements/:slug/:id' do
+    post = Post.find_by_id(params[:id])
+    if !params[:content].empty?
+      post.content = params[:content]
+      post.save
+
+      session[:success] = "Successfully edited post"
+
+      redirect to "/posts/#{post.id}"
+    else
+      session[:fail] = "Cannot create empty post"
+
+      redirect to "/posts/#{post.id}/edit"
     end
   end
 
