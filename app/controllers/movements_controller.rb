@@ -17,6 +17,21 @@ class MovementsController < ApplicationController
     end
   end
 
+  get '/movements/new' do
+
+  end
+
+  post '/movements' do
+    user = Helpers.current_user(session)
+    params[:exercises].each do |exercise_id|
+      exercise = Exercise.find_by_id(exercise_id)
+      user.exercises <<  exercise if !user.exercises.include?(exercise)
+    end
+    user.save
+
+    redirect to '/movements'
+  end
+
   get '/movements/:name' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @movement = Movement.find_by(name: params[:name])
@@ -29,17 +44,6 @@ class MovementsController < ApplicationController
     else
       redirect to '/login'
     end
-  end
-
-  post '/movements' do
-    user = Helpers.current_user(session)
-    params[:exercises].each do |exercise_id|
-      exercise = Exercise.find_by_id(exercise_id)
-      user.exercises <<  exercise if !user.exercises.include?(exercise)
-    end
-    user.save
-
-    redirect to '/movements'
   end
 
 end
