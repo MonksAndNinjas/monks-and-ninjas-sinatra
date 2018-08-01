@@ -18,7 +18,8 @@
 </section>
 
 <a href="/movements/<%= @movement.slug_movement %>/<%= @exercise.id %>/edit">Edit</a><br>
-<form action="/movements/<%= @movement.slug_movement %>/<%= @exercise.id =>/delete" method="POST">
+<form action="/movements/<%= @movement.slug_movement %>/<%= @exercise.id %>/delete" method="POST">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" value="delete">
 </form>
+<a href="/movements/<%= @movement.slug_movement %>">Back</a>
