@@ -24,7 +24,7 @@ class MovementsController < ApplicationController
       @success = session[:success]
       session[:success] = nil
 
-      erb :'movements/show'
+      erb :'movements/show1'
     elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
       flash[:message] = "Please complete registration"
 
