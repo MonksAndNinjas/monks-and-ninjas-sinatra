@@ -8,7 +8,7 @@
 <% end %>
 
   <ul>
-  <% @movement.exercises.each do |exercise| %>
+  <% @exercise_list.each do |exercise| %>
     <li><a href="/movements/<%= @movement.slug_movement %>/<%= exercise.id %>"><%= exercise.desc %></li>
   <% end %>
   </ul>

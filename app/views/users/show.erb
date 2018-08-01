@@ -52,3 +52,13 @@
 <% if Helpers.current_user(session).id == @user.id %>
   <a href="/posts/new">Create New Post</a>
 <% end %>
+
+<% if Helpers.current_user(session).id != @user.id %>
+<h3>List of Movements</h3>
+<ul>
+  <% @user.exercises.each do |exercise|%>
+    <% movement = Movement.find_by_id(exercise.movement_id) %>
+    <li><a href="/movements/<%= movement.slug_movement %>/<%= exercise.id %>"><%= exercise.desc %></a> -- <%= movement.slug_movement %></li>
+  <% end %>
+</ul>
+<% end %>

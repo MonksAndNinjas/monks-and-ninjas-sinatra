@@ -19,7 +19,10 @@ class MovementsController < ApplicationController
 
   get '/movements/:slug' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
+      user = Helpers.current_user(session)
       @movement = Movement.find_by_slug_movement(params[:slug])
+      @exercise_list = user.exercises.find_all {|exercise| exercise.movement_id == @movement.id}
+
 
       @success = session[:success]
       session[:success] = nil
@@ -58,8 +61,10 @@ class MovementsController < ApplicationController
     @movement = Movement.find_by_slug_movement(params[:slug])
     if !params[:exercise].empty? && Exercise.find_by(desc: params[:desc]) == nil
       exercise = Exercise.new(desc: params[:desc])
+      user = Helpers.current_user(session)
       @movement.exercises << exercise
-      @movement.save
+      user.exercises << exercise
+      user.save
 
       session[:success] = "Successfully added exercise"
 

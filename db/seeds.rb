@@ -145,6 +145,7 @@
 @user1.update(residence: "Los Angeles", fitness_level: "E", professional: "true")
 @user1.fitness_modalities << @fitness1
 @user1.posts << @post2
+Exercise.all.each {|exercise| @user1.exercises << exercise}
 @user1.save
 
 @user2 = User.new(username: "Nadia", email: "east@gmail.com", password: "blue")
@@ -153,12 +154,14 @@
 @user2.fitness_modalities << @fitness2
 @user2.posts << @post3
 @user2.posts << @post1
+Exercise.all.each {|exercise| @user2.exercises << exercise if exercise.id < 20 && exercise.id > 10}
 @user2.save
 
 @user3 = User.new(username: "Rhys", email: "wolf@gmail.com", password: "blue")
 @user3.update(residence: "Palo Alto", fitness_level: "N", professional: "false")
 @user3.fitness_modalities << FitnessModality.new(name: "Animal Movements")
 @user3.posts << @post7
+Exercise.all.each {|exercise| @user3.exercises << exercise if exercise.id > 20}
 @user3.save
 
 @user4 = User.new(username: "Bear", email: "manjiare@gmail.com", password: "blue")
@@ -168,6 +171,7 @@
 @user4.posts << @post6
 @user4.posts << @post5
 @user4.posts << @post8
+Exercise.all.each {|exercise| @user4.exercises << exercise if exercise.id < 10 && exercise.id > 20}
 @user4.save
 
 @user5 = User.new(username: "Sonia", email: "pepe@gmail.com", password: "blue")
@@ -175,11 +179,12 @@
 @user5.fitness_modalities << @fitness1
 @user5.fitness_modalities << FitnessModality.new(name: "Foot Volleyball")
 @user5.posts << @post4
+Exercise.all.each {|exercise| @user5.exercises << exercise if exercise.id < 10}
 @user5.save
 
 ############## NEWS ###################
 
-@news1 = News.new(title: "Beer Yoga" , content: "Have you heard of beer Yoga? Checkout the new trend to help calm you down so you can then
+@news1 = News.new(title: "Beer Yoga", content: "Have you heard of beer Yoga? Checkout the new trend to help calm you down so you can then
 properly absorb all the soothing relaxing yoga poses.")
 @news1.save
 @news2 = News.new(title: "Baby Swining", content: "Swing my baby. The long lost art of baby throwing. Watch these masters swing and toss babies
