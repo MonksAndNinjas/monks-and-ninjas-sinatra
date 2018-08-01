@@ -1,4 +1,4 @@
-<section class="movement-show">
+<section class="movements">
   <h1><%= @movement.name %></h1>
 
 <% if @success %>
@@ -9,13 +9,12 @@
 
   <ul>
   <% @movement.exercises.each do |exercise| %>
-    <li><%= exercise.desc %></li>
+    <li><a href="/movements/<%= @movement.slug_movement %>/<%= exercise.id %>"><%= exercise.desc %></li>
   <% end %>
   </ul>
 
   <br></br>
 
   <a href="/movements/<%= @movement.slug_movement %>/new">Add</a><br>
-  <a href="/movements/<%= @movement.slug_movement %>/edit">Edit</a><br>
   <a href="/movements">Back</a>
 </section>

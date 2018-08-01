@@ -68,6 +68,23 @@ class MovementsController < ApplicationController
     end
   end
 
+  get '/movements/:slug/:id' do
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
+      @exercise = Exercise.find_by_id(params[:id])
+
+      @success = session[:success]
+      session[:success] = nil
+
+      erb :'movements/show2'
+    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
+      flash[:message] = "Please complete registration"
+
+      redirect to '/about_me'
+    else
+      redirect to '/login'
+    end
+  end
+
   get '/movements/:slug/edit' do
     @movement = Movement.find_by_slug_movement(params[:slug])
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)

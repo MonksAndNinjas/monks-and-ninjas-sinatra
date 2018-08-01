@@ -3,7 +3,7 @@ require './config/environment'
 class PostsController < ApplicationController
   use Rack::Flash
 #session {:fail, :success} are used as user validation messages
-  get '/posts' do                                         
+  get '/posts' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @user = User.find_by_id(session[:user_id])
 
@@ -58,7 +58,7 @@ class PostsController < ApplicationController
 
   get '/posts/:id' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
-      @post = Post.find_by_id(params[:id])                #do I just need user?
+      @post = Post.find_by_id(params[:id])              
 
       @success = session[:success]                        #from patch '/posts/:id', post failed
       session[:success] = nil
