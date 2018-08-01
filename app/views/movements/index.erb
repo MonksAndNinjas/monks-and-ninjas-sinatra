@@ -7,7 +7,7 @@
       <th>Head</th>
     <% Movement.all.each do |move| %>
       <% if move.section == "Head" %>
-      <td><a href="/movements/<%= move.name %>"><%= move.name %></a></td>
+      <td><a href="/movements/<%= move.slug_movement %>"><%= move.name %></a></td>
       <% end %>
     <% end %>
     </tr>
@@ -16,7 +16,7 @@
       <th>Upper Body</th>
       <% Movement.all.each do |move| %>
         <% if move.section == "Upper_Body" %>
-        <td><a href="/movements/<%= move.name %>"><%= move.name %></a></td>
+        <td><a href="/movements/<%= move.slug_movement %>"><%= move.name %></a></td>
         <% end %>
       <% end %>
     </tr>
@@ -24,7 +24,7 @@
       <th>Core</th>
       <% Movement.all.each do |move| %>
         <% if move.section == "Core" %>
-        <td><a href="/movements/<%= move.name %>"><%= move.name %></a></td>
+        <td><a href="/movements/<%= move.slug_movement %>"><%= move.name %></a></td>
         <% end %>
       <% end %>
     </tr>
@@ -32,7 +32,7 @@
       <th>Lower Body</th>
       <% Movement.all.each do |move| %>
         <% if move.section == "Lower_Body" %>
-        <td><a href="/movements/<%= move.name %>"><%= move.name %></a></td>
+        <td><a href="/movements/<%= move.slug_movement %>"><%= move.name %></a></td>
         <% end %>
       <% end %>
     </tr>
@@ -42,7 +42,7 @@
   <ul>
     <% Movement.all.each do |move| %>
       <% if move.section == "Movement" %>
-      <li><a href="/movements/<%= move.name %>"><%= move.name %></a></li>
+      <li><a href="/movements/<%= move.slug_movement %>"><%= move.name %></a></li>
       <% end %>
     <% end %>
   </ul>

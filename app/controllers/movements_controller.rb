@@ -2,7 +2,7 @@ require './config/environment'
 
 class MovementsController < ApplicationController
   use Rack::Flash
-
+#session {:fail, :success} are used as user validation messages
   get '/movements' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @user = User.find_by_id(session[:user_id])
@@ -17,9 +17,9 @@ class MovementsController < ApplicationController
     end
   end
 
-  get '/movements/:name' do
+  get '/movements/:slug' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
-      @movement = Movement.find_by(name: params[:name])
+      @movement = Movement.find_by_slug_movement(params[:slug])
 
       @success = session[:success]
       session[:success] = nil
@@ -34,9 +34,9 @@ class MovementsController < ApplicationController
     end
   end
 
-  get '/movements/:name/new' do
+  get '/movements/:slug/new' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
-      @movement = Movement.find_by(name: params[:name])
+      @movement = Movement.find_by_slug_movement(params[:slug])
 
       @fail = session[:fail]
       session[:fail] = nil
@@ -51,28 +51,28 @@ class MovementsController < ApplicationController
     end
   end
 
-  post '/movements/:name' do
-    @movement = Movement.find_by(name: params[:name])
-    @exercise = Exercise.new(desc: params[:exercise])
-    if !params[:exercise].empty? && @exercise == nil
-      @movement.exercises << @exercise
-      movement.save
+  post '/movements/:slug' do
+    @movement = Movement.find_by_slug_movement(params[:slug])
+    if !params[:exercise].empty? && Exercise.find_by(desc: params[:exercise]) == nil
+      exercise = Exercise.new(desc: params[:exercise])
+      @movement.exercises << exercise
+      @movement.save
 
       session[:success] = "Successfully added exercise"
 
-      redirect to "/movements/#{@movement.name}"
+      redirect to "/movements/#{@movement.slug_movement}"
     else
       session[:fail] = "Cannot add empty or existing exercise"
 
-      redirect to "/movements/#{@movement.name}/new"
+      redirect to "/movements/#{@movement.slug_movement}/new"
     end
   end
 
-  get '/movements/:name/edit' do
-    @movement = Movement.find_by(name: params[:name])
+  get '/movements/:slug/edit' do
+    @movement = Movement.find_by_slug_movement(params[:slug])
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
 
-      @fail = session[:fail]                               
+      @fail = session[:fail]
       session[:fail] = nil
 
       erb :'movements/edit'

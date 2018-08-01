@@ -9,11 +9,11 @@
 
   <br></br>
 
-  <form action="/posts/<%= @post.id %>" method="POST">
+  <form action="/movements/<%= @movement.slug_movement %>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
 
     <label>Content</label>
-    <input type="text" name="content" placeholder="<%= @post.content %>">
+    <input type="text" name="content" placeholder="">
 
     <br></br>
 

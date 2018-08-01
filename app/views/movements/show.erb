@@ -1,5 +1,11 @@
 <h1><%= @movement.name %></h1>
 
+<% if @success %>
+  <p style="color:red;">*<%= @success %></p>
+<% elsif @delete %>
+  <p style="color:red;">*<%= @delete %></p>
+<% end %>
+
 <section class="movement-show">
   <ul>
   <% @movement.exercises.each do |exercise| %>
@@ -9,7 +15,7 @@
 
   <br></br>
 
-  <a href="/movements/<%= @movement.name %>/new">Add</a><br>
-  <a href="/movements/<%= @movement.name %>/edit">Edit</a><br>
+  <a href="/movements/<%= @movement.slug_movement %>/new">Add</a><br>
+  <a href="/movements/<%= @movement.slug_movement %>/edit">Edit</a><br>
   <a href="/movements">Back</a>
 </section>

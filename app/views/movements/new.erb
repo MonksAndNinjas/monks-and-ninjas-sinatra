@@ -4,7 +4,7 @@
   <p style="color:red;">*<%= @fail %></p>
 <% end %>
 
-<form action="/movements/<%= @movement.name %>" method="POST">
+<form action="/movements/<%= @movement.slug_movement %>" method="POST">
   <label>Exercise</label>
   <input type="text" name="exercise">
 
