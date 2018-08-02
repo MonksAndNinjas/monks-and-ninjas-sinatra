@@ -1,10 +1,9 @@
 <section class="movements">
-  <h1><%= @user.username %></h1>
   <h1><%= @movement.name %></h1>
 
   <ul>
   <% @exercise_list.each do |exercise| %>
-    <li><a href="/movements/<%= @movement.slug_movement %>/<%= exercise.id %>"><%= exercise.desc %></li>
+    <li><a href="/users/<%= @user.slug %>/<%= @movement.slug_movement %>/<%= exercise.id %>"><%= exercise.desc %></li>
   <% end %>
   </ul>
 

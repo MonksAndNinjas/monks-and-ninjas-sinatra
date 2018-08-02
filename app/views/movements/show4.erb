@@ -1,0 +1,17 @@
+<h2>Exercise <%= @exercise.id %></h1>
+
+<section class="exercise">
+  <h3>Description:</h3>
+  <p><%= @exercise.desc %></p><br>
+
+  <h3>Instructions:</h3>
+
+  <h3>Articles/Links:</h3>
+
+  <h3>Photos:</h3>
+
+  <h3>Videos:</h3>
+</section>
+
+
+<a href="/users/<%= @user.slug %>/<%= @movement.slug_movement %>">Back</a>

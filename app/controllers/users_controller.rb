@@ -85,7 +85,7 @@ class UsersController < ApplicationController
     redirect to "/users/#{user.slug}"
   end
 
-  get '/users/:slug/movements/:slug_movement' do
+  get '/users/:slug/:slug_movement' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @user = User.find_by_slug(params[:slug])
       @movement = Movement.find_by_slug_movement(params[:slug_movement])
@@ -100,6 +100,23 @@ class UsersController < ApplicationController
       redirect to '/login'
     end
   end
+
+  get '/users/:slug/:slug_movement/:id' do
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
+      @user = User.find_by_slug(params[:slug])
+      @exercise = Exercise.find_by_id(params[:id])
+      @movement = Movement.find_by_slug_movement(params[:slug_movement])
+
+      erb :'movements/show4'
+    elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
+      flash[:message] = "Please complete registration"
+
+      redirect to '/about_me'
+    else
+      redirect to '/login'
+    end
+  end
+
 
   get '/logout' do
     session.clear

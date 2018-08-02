@@ -18,7 +18,7 @@
 </section>
 
 <section id="posts">
-  <h1>Posts from other members</h1>
+  <h1>Posts from members</h1>
   <ul>
     <% Post.all.each do |post| %>
       <label><a href="/users/<%= User.find_by_id(post.user_id).slug %>"><%= User.find_by_id(post.user_id).username %></a></label>
