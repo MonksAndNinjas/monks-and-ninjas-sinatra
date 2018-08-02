@@ -1,5 +1,4 @@
-<section class="movements">
-  <h1><%= @movement.name %></h1>
+<h1><%= @movement.name %></h1>
 
 <% if @success %>
   <p style="color:red;">*<%= @success %></p>
@@ -7,12 +6,11 @@
   <p style="color:red;">*<%= @delete %></p>
 <% end %>
 
-  <ul>
-  <% @exercise_list.each do |exercise| %>
-    <li><a href="/movements/<%= @movement.slug_movement %>/<%= exercise.id %>"><%= exercise.desc %></li>
-  <% end %>
-  </ul>
+<ul>
+<% @exercise_list.each do |exercise| %>
+  <li><a href="/movements/<%= @movement.slug_movement %>/<%= exercise.id %>"><%= exercise.title %></li>
+<% end %>
+</ul>
 
-  <a href="/movements/<%= @movement.slug_movement %>/new">Add</a><br>
-  <a href="/movements">Back</a>
-</section>
+<a href="/movements/<%= @movement.slug_movement %>/new">Add</a><br>
+<a href="/movements">Back</a>

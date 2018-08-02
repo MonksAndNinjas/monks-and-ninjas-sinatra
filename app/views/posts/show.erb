@@ -11,7 +11,7 @@
   <p><%= @post.content %></p>
 </section>
 
-
+<section>
 <% if Helpers.current_user(session).id == @post.user_id %>
   <a href="/posts/<%= @post.id %>/edit">Edit Post</a>
 
@@ -21,3 +21,4 @@
   </form>
   <a href="/users/<%= Helpers.current_user(session).slug %>">Back</a>
 <% end %>
+</section>

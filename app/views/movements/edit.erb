@@ -1,10 +1,10 @@
 <% if @fail %>
   <p style="color:red;">*<%= @fail %></p>
 <% elsif @success %>
-    <p style="color:red;">*<%= @success %></p>
+  <p style="color:red;">*<%= @success %></p>
 <% end %>
 
-<section class="movements">
+<section>
   <span>Edit Movements for <%= @movement.name %></span><br>
 
   <br></br>
@@ -12,8 +12,8 @@
   <form action="/movements/<%= @movement.slug_movement %>/<%= @exercise.id %>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
 
-    <label>Description</label>
-    <input type="text" name="desc" placeholder="<%= @exercise.desc %>">
+    <label>Title</label>
+    <input type="text" name="title" placeholder="<%= @exercise.title %>">
 
     <br></br>
 

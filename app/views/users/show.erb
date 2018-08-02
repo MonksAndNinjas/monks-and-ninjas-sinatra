@@ -6,17 +6,17 @@
 
 <section class="about-user">
   <ul>
-    <% if Helpers.current_user(session).id == @user.id %>
+  <% if Helpers.current_user(session).id == @user.id %>
     <li>Email: <%= @user.email %></li>
-    <% end %>
+  <% end %>
     <li>Residence: <%= @user.residence %></li>
     <li>Fitness Level: <%= @user.fitness_level %></li>
     <li>Fitness Professional:
-    <% if @user.professional %>
+  <% if @user.professional %>
       Yes</li>
-    <% else %>
+  <% else %>
       No</li>
-    <% end %>
+  <% end %>
     <li>Fitness Specialties: </li>
     <ul>
     <% @user.fitness_modalities.each do |modality| %>
@@ -54,56 +54,59 @@
 <% end %>
 
 <% if Helpers.current_user(session).id != @user.id %>
-  <h3>Movements by muscle group</h3>
+  <section>
+    <h3>Movements by muscle group</h3>
 
-  <table>
-    <tr>
-      <th>Head</th>
-    <% Movement.all.each do |move| %>
-      <% if move.section == "Head" %>
-        <% count = @user.exercises.find_all {|x| x.movement_id == move.id }.count %>
-        <td><a href="/users/<%= @user.slug %>/<%= move.slug_movement %>"><%= move.name %><br><%= "(#{count})" if count > 0 %></a></td>
-      <% end %>
-    <% end %>
-    </tr>
-
-    <tr>
-      <th>Upper Body</th>
+    <table>
+      <tr>
+        <th>Head</th>
       <% Movement.all.each do |move| %>
-        <% if move.section == "Upper_Body" %>
+        <% if move.section == "Head" %>
           <% count = @user.exercises.find_all {|x| x.movement_id == move.id }.count %>
           <td><a href="/users/<%= @user.slug %>/<%= move.slug_movement %>"><%= move.name %><br><%= "(#{count})" if count > 0 %></a></td>
         <% end %>
       <% end %>
-    </tr>
-    <tr>
-      <th>Core</th>
-      <% Movement.all.each do |move| %>
-        <% if move.section == "Core" %>
-          <% count = @user.exercises.find_all {|x| x.movement_id == move.id }.count %>
-          <td><a href="/users/<%= @user.slug %>/<%= move.slug_movement %>"><%= move.name %><br><%= "(#{count})" if count > 0 %></a></td>
-        <% end %>
-      <% end %>
-    </tr>
-    <tr>
-      <th>Lower Body</th>
-      <% Movement.all.each do |move| %>
-        <% if move.section == "Lower_Body" %>
-          <% count = @user.exercises.find_all {|x| x.movement_id == move.id }.count %>
-          <td><a href="/users/<%= @user.slug %>/<%= move.slug_movement %>"><%= move.name %><br><%= "(#{count})" if count > 0 %></a></td>
-        <% end %>
-      <% end %>
-    </tr>
-  </table>
+      </tr>
 
-  <h3>or, by style of movement:</h3>
-  <ul>
-    <% Movement.all.each do |move| %>
-      <% if move.section == "Movement" %>
-        <% count = @user.exercises.find_all {|x| x.movement_id == move.id }.count %>
-        <li><a href="/users/<%= @user.slug %>/<%= move.slug_movement %>"><%= move.name %> <%= "(#{count})" if count > 0 %></a></li>
+      <tr>
+        <th>Upper Body</th>
+        <% Movement.all.each do |move| %>
+          <% if move.section == "Upper_Body" %>
+            <% count = @user.exercises.find_all {|x| x.movement_id == move.id }.count %>
+            <td><a href="/users/<%= @user.slug %>/<%= move.slug_movement %>"><%= move.name %><br><%= "(#{count})" if count > 0 %></a></td>
+          <% end %>
+        <% end %>
+      </tr>
+
+      <tr>
+        <th>Core</th>
+        <% Movement.all.each do |move| %>
+          <% if move.section == "Core" %>
+            <% count = @user.exercises.find_all {|x| x.movement_id == move.id }.count %>
+            <td><a href="/users/<%= @user.slug %>/<%= move.slug_movement %>"><%= move.name %><br><%= "(#{count})" if count > 0 %></a></td>
+          <% end %>
+        <% end %>
+      </tr>
+
+      <tr>
+        <th>Lower Body</th>
+        <% Movement.all.each do |move| %>
+          <% if move.section == "Lower_Body" %>
+            <% count = @user.exercises.find_all {|x| x.movement_id == move.id }.count %>
+            <td><a href="/users/<%= @user.slug %>/<%= move.slug_movement %>"><%= move.name %><br><%= "(#{count})" if count > 0 %></a></td>
+          <% end %>
+        <% end %>
+      </tr>
+    </table>
+
+    <h3>or, by style of movement:</h3>
+    <ul>
+      <% Movement.all.each do |move| %>
+        <% if move.section == "Movement" %>
+          <% count = @user.exercises.find_all {|x| x.movement_id == move.id }.count %>
+          <li><a href="/users/<%= @user.slug %>/<%= move.slug_movement %>"><%= move.name %> <%= "(#{count})" if count > 0 %></a></li>
+        <% end %>
       <% end %>
-    <% end %>
-  </ul>
-  </section>
+    </ul>
+    </section>
 <% end %>

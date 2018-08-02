@@ -4,7 +4,7 @@
   <p style="color:red;">*<%= @delete %></p>
 <% end %>
 
-<section id="news">
+<section>
   <h1>Fitness News</h1>
   <ul>
     <% News.all.each do |news| %>
@@ -17,7 +17,7 @@
   </ul>
 </section>
 
-<section id="posts">
+<section>
   <h1>Posts from members</h1>
   <ul>
     <% Post.all.each do |post| %>
@@ -30,7 +30,7 @@
   </ul>
 </section>
 
-<section id="connect">
+<section>
   <h1>Connect</h1>
   <ul>
     <% User.all.each do |user| %>
