@@ -11,49 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180731223223) do
-
-  create_table "exercises", force: :cascade do |t|
-    t.string  "desc"
-    t.integer "movement_id"
-  end
-
-  create_table "fitness_modalities", force: :cascade do |t|
-    t.string "name"
-  end
-
-  create_table "movements", force: :cascade do |t|
-    t.string "name"
-    t.string "section"
-  end
-
-  create_table "news", force: :cascade do |t|
-    t.string "title"
-    t.string "content"
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.string  "content"
-    t.integer "user_id"
-  end
-
-  create_table "user_exercises", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "exercise_id"
-  end
-
-  create_table "user_fitness_modalities", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "fitness_modality_id"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string  "username"
-    t.string  "email"
-    t.string  "password_digest"
-    t.string  "residence"
-    t.boolean "professional"
-    t.string  "fitness_level"
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end
