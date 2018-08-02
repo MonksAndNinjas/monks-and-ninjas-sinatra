@@ -1,0 +1,20 @@
+<h2>Exercise <%= @exercise.id %></h1>
+
+<% if @success %>
+  <p style="color:red;">*<%= @success %></p>
+<% end %>
+
+<section class="exercise">
+  <h3>Description:</h3>
+  <p><%= @exercise.desc %></p><br>
+
+  <h3>Instructions:</h3>
+
+  <h3>Articles/Links:</h3>
+
+  <h3>Photos:</h3>
+
+  <h3>Videos:</h3>
+</section>
+
+<a href="/movements/<%= @movement.slug_movement %>">Back</a>
