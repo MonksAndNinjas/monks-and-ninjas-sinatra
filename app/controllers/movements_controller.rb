@@ -17,17 +17,16 @@ class MovementsController < ApplicationController
     end
   end
 
-  get '/movements/:slug' do
+  get '/movements/:slug_movement' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       user = Helpers.current_user(session)
-      @movement = Movement.find_by_slug_movement(params[:slug])
+      @movement = Movement.find_by_slug_movement(params[:slug_movement])
       @exercise_list = user.exercises.find_all {|exercise| exercise.movement_id == @movement.id}
 
-
-      @success = session[:success]
+      @success = session[:success]                          #from post '/movement/:slug_movement', added exercise
       session[:success] = nil
 
-      @delete = session[:delete]
+      @delete = session[:delete]                            #from delete '/movements/:slug_movement/:id/delete'
       session[:delete] = nil
 
       erb :'movements/show1'
@@ -40,11 +39,11 @@ class MovementsController < ApplicationController
     end
   end
 
-  get '/movements/:slug/new' do
+  get '/movements/:slug_movement/new' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
-      @movement = Movement.find_by_slug_movement(params[:slug])
+      @movement = Movement.find_by_slug_movement(params[:slug_movement])
 
-      @fail = session[:fail]
+      @fail = session[:fail]                               #from post '/movements/:slug_movement/:id', exercise not added
       session[:fail] = nil
 
       erb :'movements/new'
@@ -57,32 +56,32 @@ class MovementsController < ApplicationController
     end
   end
 
-  post '/movements/:slug' do
-    @movement = Movement.find_by_slug_movement(params[:slug])
-    if !params[:desc].empty? && Exercise.find_by(desc: params[:desc]) == nil
-      exercise = Exercise.new(desc: params[:desc])
+  post '/movements/:slug_movement' do
+    movement = Movement.find_by_slug_movement(params[:slug_movement])
+    if !params[:title].empty?                                   #prevents creating an empty title
+      exercise = Exercise.new(title: params[:title])
       user = Helpers.current_user(session)
-      @movement.exercises << exercise
+      movement.exercises << exercise
       user.exercises << exercise
       user.save
 
       session[:success] = "Successfully added exercise"
 
-      redirect to "/movements/#{@movement.slug_movement}"
+      redirect to "/movements/#{movement.slug_movement}"
     else
       session[:fail] = "Cannot add empty or existing exercise"
 
-      redirect to "/movements/#{@movement.slug_movement}/new"
+      redirect to "/movements/#{movement.slug_movement}/new"
     end
   end
 
-  get '/movements/:slug/:id' do
+  get '/movements/:slug_movement/:id' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
+      @movement = Movement.find_by_slug_movement(params[:slug_movement])
       @exercise = Exercise.find_by_id(params[:id])
-      @movement = Movement.find_by_slug_movement(params[:slug])
 
       @success = session[:success]
-      session[:success] = nil
+      session[:success] = nil                              #from patch '/movements/:slug_movement/:id', exercises edited
 
       erb :'movements/show2'
     elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
@@ -94,12 +93,12 @@ class MovementsController < ApplicationController
     end
   end
 
-  get '/movements/:slug/:id/edit' do
-    @movement = Movement.find_by_slug_movement(params[:slug])
-    @exercise = Exercise.find_by_id(params[:id])
+  get '/movements/:slug_movement/:id/edit' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
+      @movement = Movement.find_by_slug_movement(params[:slug_movement])
+      @exercise = Exercise.find_by_id(params[:id])
 
-      @fail = session[:fail]
+      @fail = session[:fail]                               #from patch '/movements/:slug_movement/:id', exercise not edited
       session[:fail] = nil
 
       erb :'movements/edit'
@@ -112,26 +111,26 @@ class MovementsController < ApplicationController
     end
   end
 
-  patch '/movements/:slug/:id' do
-    @exercise = Exercise.find_by_id(params[:id])
-    @movement = Movement.find_by_slug_movement(params[:slug])
-    if !params[:desc].empty? && Exercise.find_by(desc: params[:desc]) == nil
-      @exercise.update(desc: params[:desc])
+  patch '/movements/:slug_movement/:id' do
+    movement = Movement.find_by_slug_movement(params[:slug_movment])
+    exercise = Exercise.find_by_id(params[:id])
+    if !params[:title].empty?
+      exercise.update(title: params[:title])
 
       session[:success] = "Successfully edited exercise"
 
-      redirect to "/movements/#{@movement.slug_movement}/#{@exercise.id}"
+      redirect to "/movements/#{movement.slug_movement}/#{exercise.id}"
     else
       session[:fail] = "Cannot have an empty or exisiting exercise"
 
-      redirect to "/movements/#{@movement.slug_movement}/#{@exercise.id}/edit"
+      redirect to "/movements/#{movement.slug_movement}/#{exercise.id}/edit"
     end
   end
 
-  delete '/movements/:slug/:id/delete' do
+  delete '/movements/:slug_movement/:id/delete' do
+    movement = Movement.find_by_slug_movement(params[:slug_movement])
     exercise = Exercise.find_by_id(params[:id])
     exercise.delete
-    movement = Movement.find_by_slug_movement(params[:slug])
 
     session[:delete] = "Successfully deleted exercise"
 

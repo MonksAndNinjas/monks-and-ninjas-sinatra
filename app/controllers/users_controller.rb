@@ -11,9 +11,9 @@ class UsersController < ApplicationController
 
       redirect to '/about_me'
     else
-      @logout = session[:logout]                              #from get '/logout'
+      @logout = session[:logout]
       session[:logout] = nil
-
+                                                            #from get '/logout'
       @fail = session[:fail]
       session[:fail] = nil
 
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @user = User.find_by_slug(params[:slug])
 
-      @success = session[:success]
+      @success = session[:success]                         #from patch '/users/:slug', edited user
       session[:success] = nil
 
       erb :'users/show'
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
     redirect to "/users/#{user.slug}"
   end
 
-  get '/users/:slug/:slug_movement' do
+  get '/users/:slug/:slug_movement' do                     #user can view other user's movement list, but can't c.u.d.
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @user = User.find_by_slug(params[:slug])
       @movement = Movement.find_by_slug_movement(params[:slug_movement])
@@ -101,11 +101,11 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/users/:slug/:slug_movement/:id' do
+  get '/users/:slug/:slug_movement/:id' do                 #user can view other user's individual exercise page, but can't c.u.d.
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
       @user = User.find_by_slug(params[:slug])
-      @exercise = Exercise.find_by_id(params[:id])
       @movement = Movement.find_by_slug_movement(params[:slug_movement])
+      @exercise = Exercise.find_by_id(params[:id])
 
       erb :'movements/show4'
     elsif Helpers.is_logged_in?(session) && !Helpers.registered?(session)
@@ -116,7 +116,6 @@ class UsersController < ApplicationController
       redirect to '/login'
     end
   end
-
 
   get '/logout' do
     session.clear

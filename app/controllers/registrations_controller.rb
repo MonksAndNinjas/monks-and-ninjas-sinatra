@@ -57,13 +57,14 @@ class RegistrationsController < ApplicationController
     else
       user = User.find_by_id(session[:user_id])
       user.update(residence: params[:residence], professional: params[:professional], fitness_level: params[:fitness_level])
-      if params[:modalities] != nil
+
+      if params[:modalities] != nil                                 #checks if user checked any modality boxes
         params[:modalities].each do |modality_id|
           user.fitness_modalities << FitnessModality.find_by_id(modality_id)
         end
       end
 
-      if !params[:modality_name].empty?
+      if !params[:modality_name].empty?                              #checks if user created modality
         user.fitness_modalities << FitnessModality.new(name: params[:modality_name])
       end
       user.save
