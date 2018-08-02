@@ -1,20 +1,12 @@
-<h2>Exercise <%= @exercise.id %></h1>
+<section class="movements">
+  <h1><%= @user.username %></h1>
+  <h1><%= @movement.name %></h1>
 
-<% if @success %>
-  <p style="color:red;">*<%= @success %></p>
-<% end %>
+  <ul>
+  <% @exercise_list.each do |exercise| %>
+    <li><a href="/movements/<%= @movement.slug_movement %>/<%= exercise.id %>"><%= exercise.desc %></li>
+  <% end %>
+  </ul>
 
-<section class="exercise">
-  <h3>Description:</h3>
-  <p><%= @exercise.desc %></p><br>
-
-  <h3>Instructions:</h3>
-
-  <h3>Articles/Links:</h3>
-
-  <h3>Photos:</h3>
-
-  <h3>Videos:</h3>
+  <a href="/users/<%= @user.slug %>">Back</a>
 </section>
-
-<a href="/movements/<%= @movement.slug_movement %>">Back</a>
