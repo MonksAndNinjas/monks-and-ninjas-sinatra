@@ -25,27 +25,29 @@ Specs:
 
       Second, methods are used within the ERB file to display modification links only if the user id of that information is equal to the user id of the sessions hash.
 
-      Models names for the resources whose editing is limited include User, Posts, and FitnessModality.
+      Models names for the resources whose editing is limited include User, Posts, Movements, Exercises and FitnessModality.
 
       FitnessModality can only be edited in the about_me user page.
 
 - [X] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
-      Posts contains get, post, patch, delete routes. User contains get, post, and patch routes, but not destroy.
+      Posts and Exercises contains get, post, patch, delete routes. User contains get, post, and patch routes, but not destroy.
 
 - [X] Include user input validations
       User activerecord table contains password_digest which allows user model to contain securd password. When user logs-in, in post login in users controller a user.authenticate method is used to make sure user exists and correct user information is brought up.
 
-      In post controller post /signup route, !params[:username].empty? && !params[:email].empty? && !params[:password].empty?, are used to make sure user does not submit empty information, otherwise redirected to signup again.
+      In registration controller post /signup route, !params[:username].empty? && !params[:email].empty? && !params[:password].empty?, are used to make sure user does not submit empty information, otherwise redirected to signup again.
 
 
       It is also required that user fills out about_me completely. Any empty slots will redirect the user back to about_me until completed. Even if they navigate to another website and back. This is handled by requiring Helpers.registered?(arg) to be true on any get route.
 
       An empty fitness modality cannot be created because of code in post '/about_me'.
 
+      An empty exercise cannot be created because of code in post '/movements/:slug_movement'
+
       User cannot make duplicate account if username and email already exists.
 
 - [x] Display validation failures to user with error message (example form URL e.g. /posts/new)
-      For logging out, editing user, creating new post, editing post, deleting post, incomplete registration, all have messages that let the user know if they successfully completed action or failed. All messages are handled by flash and session hashes.
+      For logging out, editing user, creating new post or exercise, editing post or exercise, deleting post or exercise, incomplete registration, all have messages that let the user know if they successfully completed action or failed. All messages are handled by flash and session hashes.
 
 - [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
