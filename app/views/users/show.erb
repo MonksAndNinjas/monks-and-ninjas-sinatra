@@ -56,9 +56,16 @@
 <% if Helpers.current_user(session).id != @user.id %>
 <h3>List of Movements</h3>
 <ul>
-  <% @user.exercises.each do |exercise|%>
+  <% sorted = @user.exercises.sort {|a,b| a.movement_id <=> b.movement_id } %>
+  <% sorted.each do |exercise| %>
     <% movement = Movement.find_by_id(exercise.movement_id) %>
-    <li><a href="/movements/<%= movement.slug_movement %>/<%= exercise.id %>"><%= exercise.desc %></a> -- <%= movement.slug_movement %></li>
+    <li><a href="/movements/<%= movement.slug_movement %>/<%= exercise.id %>"><%= exercise.desc %></a> --
+    <% if movement.section != "Movement" %>
+      <%= movement.section %>
+    <% else %>
+      <%= movement.name %>
+    <% end %>
+    </li>
   <% end %>
 </ul>
 <% end %>

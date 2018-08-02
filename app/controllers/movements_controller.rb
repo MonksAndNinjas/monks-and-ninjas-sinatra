@@ -59,7 +59,7 @@ class MovementsController < ApplicationController
 
   post '/movements/:slug' do
     @movement = Movement.find_by_slug_movement(params[:slug])
-    if !params[:exercise].empty? && Exercise.find_by(desc: params[:desc]) == nil
+    if !params[:desc].empty? && Exercise.find_by(desc: params[:desc]) == nil
       exercise = Exercise.new(desc: params[:desc])
       user = Helpers.current_user(session)
       @movement.exercises << exercise
