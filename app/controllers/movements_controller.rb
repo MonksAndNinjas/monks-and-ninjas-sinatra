@@ -112,7 +112,7 @@ class MovementsController < ApplicationController
   end
 
   patch '/movements/:slug_movement/:id' do
-    movement = Movement.find_by_slug_movement(params[:slug_movment])
+    movement = Movement.find_by_slug_movement(params[:slug_movement])
     exercise = Exercise.find_by_id(params[:id])
     if !params[:title].empty?
       exercise.update(title: params[:title])

@@ -2,113 +2,113 @@
 ############### Movements #################
 
 @movement1 = Movement.new(name: "Neck", section: "Head")
-@movement1.exercises << Exercise.new(desc: "Humming")
+@movement1.exercises << Exercise.new(title: "Humming")
 @movement1.save
 @movement2 = Movement.new(name: "Nose", section: "Head")
-@movement2.exercises << Exercise.new(desc: "Smell")
+@movement2.exercises << Exercise.new(title: "Smell")
 @movement2.save
 @movement3 = Movement.new(name: "Ears", section: "Head")
-@movement3.exercises << Exercise.new(desc: "Hearing")
+@movement3.exercises << Exercise.new(title: "Hearing")
 @movement3.save
 @movement4 = Movement.new(name: "Mouth", section: "Head")
-@movement4.exercises << Exercise.new(desc: "Tongue shapes")
+@movement4.exercises << Exercise.new(title: "Tongue shapes")
 @movement4.save
 @movement5 = Movement.new(name: "Chin", section: "Head")
-@movement5.exercises << Exercise.new(desc: "Table chin hold")
+@movement5.exercises << Exercise.new(title: "Table chin hold")
 @movement5.save
 @movement6 = Movement.new(name: "Eyes", section: "Head")
-@movement6.exercises << Exercise.new(desc: "Track the ball (Don't move head)")
+@movement6.exercises << Exercise.new(title: "Track the ball (Don't move head)")
 @movement6.save
 @movement7 = Movement.new(name: "Forehead", section: "Head")
-@movement7.exercises << Exercise.new(desc: "Wrestlers forehead drill")
+@movement7.exercises << Exercise.new(title: "Wrestlers forehead drill")
 @movement7.save
 @movement8 = Movement.new(name: "Face", section: "Head")
-@movement8.exercises << Exercise.new(desc: "Goofy faces")
+@movement8.exercises << Exercise.new(title: "Goofy faces")
 @movement8.save
 
 @movement9 = Movement.new(name: "Shoulder", section: "Upper_Body")
-@movement9.exercises << Exercise.new(desc: "Lateral Raises")
+@movement9.exercises << Exercise.new(title: "Lateral Raises")
 @movement9.save
 @movement10 = Movement.new(name: "Chest", section: "Upper_Body")
-@movement10.exercises << Exercise.new(desc: "Bench Press")
+@movement10.exercises << Exercise.new(title: "Bench Press")
 @movement10.save
 @movement11 = Movement.new(name: "Upper Back", section: "Upper_Body")
-@movement11.exercises << Exercise.new(desc: "Dumbell shoulder shrugs")
+@movement11.exercises << Exercise.new(title: "Dumbell shoulder shrugs")
 @movement11.save
 @movement12 = Movement.new(name: "Upper Arm", section: "Upper_Body")
-@movement12.exercises << Exercise.new(desc: "Bicep curl")
+@movement12.exercises << Exercise.new(title: "Bicep curl")
 @movement12.save
 @movement13 = Movement.new(name: "Forearm", section: "Upper_Body")
-@movement13.exercises << Exercise.new(desc: "Wrist curls")
+@movement13.exercises << Exercise.new(title: "Wrist curls")
 @movement13.save
 @movement14 = Movement.new(name: "Hands", section: "Upper_Body")
-@movement14.exercises << Exercise.new(desc: "Open/Close hands rapidly")
+@movement14.exercises << Exercise.new(title: "Open/Close hands rapidly")
 @movement14.save
 
 @movement15 = Movement.new(name: "Abdominals", section: "Core")
-@movement15.exercises << Exercise.new(desc: "Crunches")
+@movement15.exercises << Exercise.new(title: "Crunches")
 @movement15.save
 @movement16 = Movement.new(name: "Lower Back", section: "Core")
-@movement16.exercises << Exercise.new(desc: "Good mornings")
+@movement16.exercises << Exercise.new(title: "Good mornings")
 @movement16.save
 @movement17 = Movement.new(name: "Obliques", section: "Core")
-@movement17.exercises << Exercise.new(desc: "Captain's Chair")
+@movement17.exercises << Exercise.new(title: "Captain's Chair")
 @movement17.save
 @movement18 = Movement.new(name: "Transverse", section: "Core")
-@movement18.exercises << Exercise.new(desc: "Birdog")
+@movement18.exercises << Exercise.new(title: "Birdog")
 @movement18.save
 
 @movement19 = Movement.new(name: "Hips", section: "Lower_Body")
-@movement19.exercises << Exercise.new(desc: "Hip Throw")
+@movement19.exercises << Exercise.new(title: "Hip Throw")
 @movement19.save
 @movement20 = Movement.new(name: "Upper Leg", section: "Lower_Body")
-@movement20.exercises << Exercise.new(desc: "Lunges")
+@movement20.exercises << Exercise.new(title: "Lunges")
 @movement20.save
 @movement21 = Movement.new(name: "Lower Leg", section: "Lower_Body")
-@movement21.exercises << Exercise.new(desc: "Calf raises")
+@movement21.exercises << Exercise.new(title: "Calf raises")
 @movement21.save
 @movement22 = Movement.new(name: "Feet", section: "Lower_Body")
-@movement22.exercises << Exercise.new(desc: "Towel grab")
+@movement22.exercises << Exercise.new(title: "Towel grab")
 @movement22.save
 
 @movement23 = Movement.new(name: "Swinging", section: "Movement")
-@movement23.exercises << Exercise.new(desc: "Russian Swing")
+@movement23.exercises << Exercise.new(title: "Russian Swing")
 @movement23.save
 @movement24 = Movement.new(name: "Strength", section: "Movement")
-@movement24.exercises << Exercise.new(desc: "Snatch")
+@movement24.exercises << Exercise.new(title: "Snatch")
 @movement24.save
 @movement25 = Movement.new(name: "Endurence", section: "Movement")
-@movement25.exercises << Exercise.new(desc: "Running")
+@movement25.exercises << Exercise.new(title: "Running")
 @movement25.save
 @movement26 = Movement.new(name: "Power/Plyo", section: "Movement")
-@movement26.exercises << Exercise.new(desc: "Jumping")
+@movement26.exercises << Exercise.new(title: "Jumping")
 @movement26.save
 @movement27 = Movement.new(name: "Body Weight", section: "Movement")
-@movement27.exercises << Exercise.new(desc: "Planche")
+@movement27.exercises << Exercise.new(title: "Planche")
 @movement27.save
 @movement28 = Movement.new(name: "Climbing", section: "Movement")
-@movement28.exercises << Exercise.new(desc: "Bouldering")
+@movement28.exercises << Exercise.new(title: "Bouldering")
 @movement28.save
 @movement29 = Movement.new(name: "Swimming", section: "Movement")
-@movement29.exercises << Exercise.new(desc: "Lap swimming")
+@movement29.exercises << Exercise.new(title: "Lap swimming")
 @movement29.save
 @movement30 = Movement.new(name: "Gracefulness", section: "Movement")
-@movement30.exercises << Exercise.new(desc: "Ballet")
+@movement30.exercises << Exercise.new(title: "Ballet")
 @movement30.save
 @movement31 = Movement.new(name: "Meditation", section: "Movement")
-@movement31.exercises << Exercise.new(desc: "Kundilini Yoga")
+@movement31.exercises << Exercise.new(title: "Kundilini Yoga")
 @movement31.save
 @movement32 = Movement.new(name: "Mobility", section: "Movement")
-@movement32.exercises << Exercise.new(desc: "Splits")
+@movement32.exercises << Exercise.new(title: "Splits")
 @movement32.save
 @movement33 = Movement.new(name: "Balance", section: "Movement")
-@movement33.exercises << Exercise.new(desc: "Skateboarding")
+@movement33.exercises << Exercise.new(title: "Skateboarding")
 @movement33.save
 @movement34 = Movement.new(name: "Iron Body", section: "Movement")
-@movement34.exercises << Exercise.new(desc: "Shin Conditioning - Muay Thai")
+@movement34.exercises << Exercise.new(title: "Shin Conditioning - Muay Thai")
 @movement34.save
 @movement35 = Movement.new(name: "Tumbling", section: "Movement")
-@movement35.exercises << Exercise.new(desc: "Back flip")
+@movement35.exercises << Exercise.new(title: "Back flip")
 @movement35.save
 
 ############### FITNESS MODALITIES ####################
