@@ -145,7 +145,7 @@
 @user1.update(residence: "Los Angeles", fitness_level: "E", professional: "true")
 @user1.fitness_modalities << @fitness1
 @user1.posts << @post2
-Exercise.all.each {|exercise| @user1.exercises << exercise}
+Exercise.all.each {|exercise| @user1.exercises << exercise if exercise.id < 10}
 @user1.save
 
 @user2 = User.new(username: "Nadia", email: "east@gmail.com", password: "blue")
@@ -154,14 +154,14 @@ Exercise.all.each {|exercise| @user1.exercises << exercise}
 @user2.fitness_modalities << @fitness2
 @user2.posts << @post3
 @user2.posts << @post1
-Exercise.all.each {|exercise| @user2.exercises << exercise if exercise.id < 20 && exercise.id > 10}
+Exercise.all.each {|exercise| @user2.exercises << exercise if exercise.id > 10 && exercise.id < 15}
 @user2.save
 
 @user3 = User.new(username: "Rhys", email: "wolf@gmail.com", password: "blue")
 @user3.update(residence: "Palo Alto", fitness_level: "N", professional: "false")
 @user3.fitness_modalities << FitnessModality.new(name: "Animal Movements")
 @user3.posts << @post7
-Exercise.all.each {|exercise| @user3.exercises << exercise if exercise.id > 20}
+Exercise.all.each {|exercise| @user3.exercises << exercise if exercise.id > 14 && exercise.id < 20}
 @user3.save
 
 @user4 = User.new(username: "Bear", email: "manjiare@gmail.com", password: "blue")
@@ -171,7 +171,7 @@ Exercise.all.each {|exercise| @user3.exercises << exercise if exercise.id > 20}
 @user4.posts << @post6
 @user4.posts << @post5
 @user4.posts << @post8
-Exercise.all.each {|exercise| @user4.exercises << exercise if exercise.id < 10 && exercise.id > 20}
+Exercise.all.each {|exercise| @user4.exercises << exercise if exercise.id > 19 && exercise.id < 25}
 @user4.save
 
 @user5 = User.new(username: "Sonia", email: "pepe@gmail.com", password: "blue")
@@ -179,7 +179,7 @@ Exercise.all.each {|exercise| @user4.exercises << exercise if exercise.id < 10 &
 @user5.fitness_modalities << @fitness1
 @user5.fitness_modalities << FitnessModality.new(name: "Foot Volleyball")
 @user5.posts << @post4
-Exercise.all.each {|exercise| @user5.exercises << exercise if exercise.id < 10}
+Exercise.all.each {|exercise| @user5.exercises << exercise if exercise.id > 24}
 @user5.save
 
 ############## NEWS ###################

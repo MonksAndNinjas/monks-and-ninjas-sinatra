@@ -94,7 +94,8 @@ class MovementsController < ApplicationController
   end
 
   get '/movements/:slug_movement/:id/edit' do
-    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
+    user = Helpers.current_user(session)                #cannot edit someone elses movement organizer
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session) && user.exercises.find_by_id(params[:id]) != nil
       @movement = Movement.find_by_slug_movement(params[:slug_movement])
       @exercise = Exercise.find_by_id(params[:id])
 

@@ -58,7 +58,7 @@ class PostsController < ApplicationController
 
   get '/posts/:id' do
     if Helpers.is_logged_in?(session) && Helpers.registered?(session)
-      @post = Post.find_by_id(params[:id])              
+      @post = Post.find_by_id(params[:id])
 
       @success = session[:success]                        #from patch '/posts/:id', post failed
       session[:success] = nil
@@ -74,7 +74,8 @@ class PostsController < ApplicationController
   end
 
   get '/posts/:id/edit' do
-    if Helpers.is_logged_in?(session) && Helpers.registered?(session)
+    user = Helpers.current_user(session)                   #does not allow user to edit other users posts
+    if Helpers.is_logged_in?(session) && Helpers.registered?(session) && user.posts.find_by_id(params[:id]) != nil
       @post = Post.find_by_id(params[:id])
 
       @fail = session[:fail]                               #from patch '/posts/:id', post created
