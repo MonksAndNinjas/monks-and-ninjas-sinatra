@@ -115,7 +115,7 @@ class MovementsController < ApplicationController
   patch '/movements/:slug_movement/:id' do
     movement = Movement.find_by_slug_movement(params[:slug_movement])
     exercise = Exercise.find_by_id(params[:id])
-    if !params[:title].empty?
+    if !params[:title].empty? && Helpers.current_user(session).exercises.find_by_id(params[:id]) != nil
       exercise.update(title: params[:title])
 
       session[:success] = "Successfully edited exercise"
@@ -129,13 +129,17 @@ class MovementsController < ApplicationController
   end
 
   delete '/movements/:slug_movement/:id/delete' do
-    movement = Movement.find_by_slug_movement(params[:slug_movement])
-    exercise = Exercise.find_by_id(params[:id])
-    exercise.delete
+    if Helpers.current_user(session).exercises.find_by_id(params[:id]) != nil
+      movement = Movement.find_by_slug_movement(params[:slug_movement])
+      exercise = Exercise.find_by_id(params[:id])
+      exercise.delete
 
-    session[:delete] = "Successfully deleted exercise"
+      session[:delete] = "Successfully deleted exercise"
 
-    redirect to "/movements/#{movement.slug_movement}"
+      redirect to "/movements/#{movement.slug_movement}"
+    else
+      redirect to '/movements'
+    end
   end
 
 end

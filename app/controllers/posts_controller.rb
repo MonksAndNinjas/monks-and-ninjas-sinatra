@@ -93,7 +93,7 @@ class PostsController < ApplicationController
 
   patch '/posts/:id' do
     post = Post.find_by_id(params[:id])
-    if !params[:content].empty?
+    if !params[:content].empty? && Helpers.current_user(session).posts.find_by_id(params[:id]) != nil
       post.content = params[:content]
       post.save
 
@@ -108,12 +108,16 @@ class PostsController < ApplicationController
   end
 
   delete '/posts/:id/delete' do
-    post = Post.find_by_id(params[:id])
-    post.delete
+    if Helpers.current_user(session).posts.find_by_id(params[:id]) != nil
+      post = Post.find_by_id(params[:id])
+      post.delete
 
-    session[:delete] = "Successfully deleted post"
+      session[:delete] = "Successfully deleted post"
 
-    redirect to '/posts'
+      redirect to '/posts'
+    else
+      redirect to '/posts'
+    end
   end
 
 end
